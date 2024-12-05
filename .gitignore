@@ -6,3 +6,5 @@ models/sentiment/results/
 models/sentiment/special_tokens*.*
 models/sentiment/tokenizer*.*
 models/sentiment/vocab.txt
+served_model/model*.*
+served_model/config.*
