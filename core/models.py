@@ -34,3 +34,16 @@ class Review(models.Model):
 
     def __str__(self):
         return f"Review for {self.game.title} by {self.user_id}"
+
+# Create table: genres
+class Genre(models.Model):
+    game = models.ForeignKey(
+        Game,
+        on_delete = models.CASCADE,
+        to_field = 'parent_asin',
+        db_column = 'parent_asin'
+    )
+    genre = models.CharField(max_length = 50)
+
+    def __str__(self):
+        return f"Genre for {self.game.title}: {self.genre}"
