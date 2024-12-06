@@ -1,13 +1,17 @@
-import dotenv
+import os
 
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 # paths like: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY
-SECRET_KEY = dotenv.get_key('../.env', 'SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY')
+
 
 # SECURITY
 DEBUG = True
