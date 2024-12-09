@@ -1,9 +1,11 @@
+/* General body styles */
 body {
     background-color: #1a1a2e; /* Dark violet background */
     color: #ececec; /* Light text for contrast */
     font-family: 'Arial', sans-serif;
 }
 
+/* Navigation bar styles */
 .navbar {
     background-color: #2d2d44;
     border-bottom-left-radius: 15px;
@@ -16,14 +18,17 @@ body {
     z-index: 1000;
 }
 
-.navbar-brand, .nav-link {
+.navbar-brand,
+.nav-link {
     color: #ececec !important;
 }
 
-.navbar-brand:hover, .nav-link:hover {
-    color: #d9b3ff !important;
+.navbar-brand:hover,
+.nav-link:hover {
+    color: #d9b3ff !important; /* Hover effect for links */
 }
 
+/* Container styles */
 .container {
     max-width: 900px;
     margin: 20px auto;
@@ -33,6 +38,7 @@ body {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
 }
 
+/* Header styles */
 .header-image {
     width: 100%;
     border-radius: 15px;
@@ -46,7 +52,8 @@ body {
     color: #d9b3ff; /* Violet tone */
 }
 
-.review-card {
+/* Card styles */
+.body-card {
     background-color: #3b3b5e; /* Subtle card contrast */
     margin-bottom: 20px;
     border-radius: 10px;
@@ -54,11 +61,12 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
 }
 
-.review-card:hover {
+.body-card:hover {
     transform: translateY(-5px);
     transition: all 0.3s ease;
 }
 
+/* Button styles */
 .btn-custom {
     background-color: #6b52a7; /* Violet button color */
     border: none;
@@ -70,23 +78,11 @@ body {
     margin: 0 auto;
 }
 
-.btn-games {
-    background-color: #6b52a7; /* Violet button color */
-    border: none;
-    color: #fff;
-    border-radius: 20px;
-    padding: 10px 20px;
-    text-align: center;
-}
-
 .btn-custom:hover {
-    background-color: #8a6dd1;
+    background-color: #8a6dd1; /* Hover effect for buttons */
 }
 
-.btn-games:hover {
-    background-color: #8a6dd1;
-}
-
+/* Layout styles for games */
 .games-container {
     display: flex;
 }
@@ -105,6 +101,7 @@ body {
     border-radius: 5px;
 }
 
+/* Top games section styles */
 .top-games {
     border-radius: 10px;
     background-color: #3b3b5e;
@@ -113,21 +110,70 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
 }
 
-.summary-box {
-    height: 17em;
-    transition: all 0.5s ease;
-}
-
-.summary-box.expanded {
-    height: 50em;
-}
-
-.expandable {
-  height: 100%;
-}
-
+/* Footer styles */
 footer {
     text-align: center;
     margin: 20px 0;
     color: #a2a2c1;
+}
+
+/* Summary box styles */
+.summary-box {
+    transition: all 0.5s ease;
+}
+
+.summary-head {
+    overflow: hidden;
+}
+
+.summary-image img {
+    border-radius: 0.5em;
+}
+
+.summary-content {
+    margin-left: 1em;
+    height: 14.3em;
+}
+
+.summary-btn {
+    background-color: #6b52a7; /* Violet button color */
+    border: none;
+    color: #fff;
+    border-radius: 20px;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+.summary-btn:hover {
+    background-color: #8a6dd1;
+}
+
+.summary-box.expanded {
+    height: 50em; /* Expanded state for summary */
+}
+
+.expandable {
+    height: 100%;
+}
+
+/* Pick card styles */
+.pick-card {
+    background-color: #2d2d44;
+    border-radius: 10px;
+    border: 1px solid black;
+    min-height: 100%;
+}
+
+.pick-card-body {
+    background-color: #2d2d44;
+    color: #ececec;
+}
+
+/* Highlighted text styles */
+.pro-text b {
+    color: green;
+}
+
+.contra-text b {
+    color: red;
 }
