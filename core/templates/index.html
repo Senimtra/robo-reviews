@@ -122,6 +122,19 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
         }
 
+        .summary-box {
+            height: 17em;
+            transition: all 0.5s ease;
+        }
+
+        .summary-box.expanded {
+            height: 50em;
+        }
+
+        .expandable {
+          height: 100%;
+        }
+
         footer {
             text-align: center;
             margin: 20px 0;
@@ -170,12 +183,12 @@
             <h3 class="card-title">Combat-Focused Gameplay</h3>
             <p class="card-text">Represents games centered on battles, warfare, and multiplayer combat.<br>
                 Includes FPS, tactical shooters, and MOBAs, with a focus on defeating enemies and teamwork.</p>
-            <div class="container d-flex">
+            <div class="container summary-box d-flex">
                 <div class="card-body" style="flex: 3;">
                     <img src="{% static 'images/games_topic_1.png' %}" width="100%">
                 </div>
                 <div class="d-flex justify-content-end align-items-end" style="flex: 7;">
-                    <button class="btn btn-games">Explore!</button>
+                    <button class="btn btn-games" onclick="expandSummary(this)">Explore!</button>
                 </div>
             </div>
         </div>
@@ -183,12 +196,12 @@
             <h3 class="card-title">Engaging Simulated Worlds</h3>
             <p class="card-text">Encompasses games involving sports, racing, and team challenges,<br>
                 as well as simulation games like life management or vehicle-based gameplay.</p>
-            <div class="container d-flex justify-content-between">
-                <div class="card-body text-center" style="flex: 3;">
+            <div class="container summary-box d-flex">
+                <div class="card-body" style="flex: 3;">
                     <img src="{% static 'images/games_topic_2.png' %}" width="100%">
                 </div>
                 <div class="d-flex justify-content-end align-items-end" style="flex: 7;">
-                    <button class="btn btn-games">Explore!</button>
+                    <button class="btn btn-games" onclick="expandSummary(this)">Explore!</button>
                 </div>
             </div>
         </div>
@@ -196,12 +209,12 @@
             <h3 class="card-title">Action and Tactical Strategy</h3>
             <p class="card-text">Covers games with action-packed combat, exploration, and abilities,<br>
                 while also including strategic games where planning and tactical execution are essential.</p>
-            <div class="container d-flex justify-content-between">
-                <div class="card-body text-center" style="flex: 3;">
+            <div class="container summary-box d-flex">
+                <div class="card-body" style="flex: 3;">
                     <img src="{% static 'images/games_topic_3.png' %}" width="100%">
                 </div>
                 <div class="d-flex justify-content-end align-items-end" style="flex: 7;">
-                    <button class="btn btn-games">Explore!</button>
+                    <button class="btn btn-games" onclick="expandSummary(this)">Explore!</button>
                 </div>
             </div>
         </div>
@@ -209,12 +222,12 @@
             <h3 class="card-title">Open Worlds and Discovery</h3>
             <p class="card-text">Reflects games with a focus on story-driven adventures, open-world exploration,<br>
                 life simulation, survival, or sandbox-style gameplay.</p>
-            <div class="container d-flex justify-content-between">
-                <div class="card-body text-center" style="flex: 3;">
+            <div class="container summary-box d-flex">
+                <div class="card-body" style="flex: 3;">
                     <img src="{% static 'images/games_topic_4.png' %}" width="100%">
                 </div>
                 <div class="d-flex justify-content-end align-items-end" style="flex: 7;">
-                    <button class="btn btn-games">Explore!</button>
+                    <button class="btn btn-games" onclick="expandSummary(this)">Explore!</button>
                 </div>
             </div>
         </div>
@@ -302,5 +315,14 @@
         </div>
         <footer>&copy; 2024 Game Reviews Hub. All rights reserved.</footer>
     </div>
+    <script>
+        function expandSummary(button) {
+            const summaryBox = button.closest('.summary-box');
+            const allSummaryBoxes = Array.from(document.getElementsByClassName('summary-box'));
+            const otherBoxes = allSummaryBoxes.filter(box => box !== summaryBox);
+            otherBoxes.forEach(box => box.classList.remove('expanded'));
+            summaryBox.classList.toggle('expanded');
+        }
+    </script>
 </body>
 </html>
