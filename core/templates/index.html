@@ -1,0 +1,306 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Reviews</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #1a1a2e; /* Dark violet background */
+            color: #ececec; /* Light text for contrast */
+            font-family: 'Arial', sans-serif;
+        }
+
+        .navbar {
+            background-color: #2d2d44;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            max-width: 900px;
+            margin: auto;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-brand, .nav-link {
+            color: #ececec !important;
+        }
+
+        .navbar-brand:hover, .nav-link:hover {
+            color: #d9b3ff !important;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #2d2d44; /* Slightly lighter dark tone for contrast */
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+        }
+
+        .header-image {
+            width: 100%;
+            border-radius: 15px;
+        }
+
+        .header-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin: 20px 0;
+            font-weight: bold;
+            color: #d9b3ff; /* Violet tone */
+        }
+
+        .review-card {
+            background-color: #3b3b5e; /* Subtle card contrast */
+            margin-bottom: 20px;
+            border-radius: 10px;
+            padding: 20px 20px 5px 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+        }
+
+        .btn-custom {
+            background-color: #6b52a7; /* Violet button color */
+            border: none;
+            color: #fff;
+            border-radius: 20px;
+            padding: 10px 20px;
+            text-align: center;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .btn-games {
+            background-color: #6b52a7; /* Violet button color */
+            border: none;
+            color: #fff;
+            border-radius: 20px;
+            padding: 10px 20px;
+            text-align: center;
+        }
+
+        .btn-custom:hover {
+            background-color: #8a6dd1;
+        }
+
+        .btn-games:hover {
+            background-color: #8a6dd1;
+        }
+
+        .games-container {
+            display: flex;
+        }
+
+        .left {
+            flex: 3;
+        }
+
+        .right {
+            flex: 7;
+        }
+
+        .card-img {
+            object-fit: cover;
+            height: 5em;
+            border-radius: 5px;
+        }
+
+        .top-games {
+            border-radius: 10px;
+            background-color: #3b3b5e;
+            margin: 20px 0;
+            padding: 10px 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        footer {
+            text-align: center;
+            margin: 20px 0;
+            color: #a2a2c1;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Game Reviews</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#reviews">Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#games">Games</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#models">Models</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <img src="{% static 'images/robo_reviews_header.png' %}" alt="Gaming AI Robot" class="header-image">
+        <div class="top-games">
+            <div class="row">
+                {% for image in top_games_image_list %}
+                    <div class="col-1 p-1">
+                        <div><img src="{{ image }}" class="card-img"></div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <h1 class="header-title">Finding Your New Adventure...</h1>
+        <div class="review-card">
+            <h3 class="card-title">Combat-Focused Gameplay</h3>
+            <p class="card-text">Represents games centered on battles, warfare, and multiplayer combat.<br>
+                Includes FPS, tactical shooters, and MOBAs, with a focus on defeating enemies and teamwork.</p>
+            <div class="container d-flex">
+                <div class="card-body" style="flex: 3;">
+                    <img src="{% static 'images/games_topic_1.png' %}" width="100%">
+                </div>
+                <div class="d-flex justify-content-end align-items-end" style="flex: 7;">
+                    <button class="btn btn-games">Explore!</button>
+                </div>
+            </div>
+        </div>
+        <div class="review-card">
+            <h3 class="card-title">Engaging Simulated Worlds</h3>
+            <p class="card-text">Encompasses games involving sports, racing, and team challenges,<br>
+                as well as simulation games like life management or vehicle-based gameplay.</p>
+            <div class="container d-flex justify-content-between">
+                <div class="card-body text-center" style="flex: 3;">
+                    <img src="{% static 'images/games_topic_2.png' %}" width="100%">
+                </div>
+                <div class="d-flex justify-content-end align-items-end" style="flex: 7;">
+                    <button class="btn btn-games">Explore!</button>
+                </div>
+            </div>
+        </div>
+        <div class="review-card">
+            <h3 class="card-title">Action and Tactical Strategy</h3>
+            <p class="card-text">Covers games with action-packed combat, exploration, and abilities,<br>
+                while also including strategic games where planning and tactical execution are essential.</p>
+            <div class="container d-flex justify-content-between">
+                <div class="card-body text-center" style="flex: 3;">
+                    <img src="{% static 'images/games_topic_3.png' %}" width="100%">
+                </div>
+                <div class="d-flex justify-content-end align-items-end" style="flex: 7;">
+                    <button class="btn btn-games">Explore!</button>
+                </div>
+            </div>
+        </div>
+        <div class="review-card">
+            <h3 class="card-title">Open Worlds and Discovery</h3>
+            <p class="card-text">Reflects games with a focus on story-driven adventures, open-world exploration,<br>
+                life simulation, survival, or sandbox-style gameplay.</p>
+            <div class="container d-flex justify-content-between">
+                <div class="card-body text-center" style="flex: 3;">
+                    <img src="{% static 'images/games_topic_4.png' %}" width="100%">
+                </div>
+                <div class="d-flex justify-content-end align-items-end" style="flex: 7;">
+                    <button class="btn btn-games">Explore!</button>
+                </div>
+            </div>
+        </div>
+        <div id="models">
+            <h2>Models</h2>
+            <p>Used models and clustering techniques...</p>
+        </div>
+        <div class="review-card">
+            <h3 class="card-title">Review Sentiment Analysis</h3>
+            <p class="card-title"><b>Classifying Positive, Neutral, and Negative Sentiments</b></p>
+            <p></p>
+            <p class="card-text">This analysis is using DistilBERT in regression mode to predict a single sentiment score. The regression output is categorized into positive, neutral, or negative sentiments through binning.
+                <li>Deployed TinyBERT to ensure lightweight, efficient performance.</li>
+                <li>Highlighting the model's decision-making by marking words or phrases.</li>
+                <li>Monte Carlo Sampling for enhanced result stability.</li>
+            </p>
+            <div>
+                <div class="row">
+                    <img src="{% static 'images/sentiment_1.png' %}">
+                </div>
+                <div><p></p></div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="{% static 'images/sentiment_2.png' %}" class="img-fluid" alt="Image 1">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <img src="{% static 'images/sentiment_3.png' %}" class="img-fluid" alt="Image 2">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p></p>
+        </div>
+        <div class="review-card">
+            <h3 class="card-title">Clustering</h3>
+            <p class="card-title"><b>Clustering</b></p>
+            <div class="container my-4">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card-title">Topic 1</div>
+                        <div class="card">
+                            <div class="card-body">
+                                <img src="{% static 'images/topic_1.png' %}" width="100%">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card-title">Topic 2</div>
+                        <div class="card">
+                            <div class="card-body">
+                                <img src="{% static 'images/topic_2.png' %}" width="100%">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <div class="card-title">Topic 3</div>
+                        <div class="card">
+                            <div class="card-body">
+                                <img src="{% static 'images/topic_3.png' %}" width="100%">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card-title">Topic 4</div>
+                        <div class="card">
+                            <div class="card-body">
+                                <img src="{% static 'images/topic_4.png' %}" width="100%">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, repellendus ipsa quam quibusdam quas, eaque eos ipsum dolorum eum, perspiciatis modi! Repellat quos pariatur non perspiciatis consequuntur, esse temporibus! Tempora.</p>
+        </div>
+        <div class="review-card">
+            <h3 class="card-title">Summerizing</h3>
+            <p class="card-title"><b>Summerizing</b></p>
+            <p></p>
+            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, repellendus ipsa quam quibusdam quas, eaque eos ipsum dolorum eum, perspiciatis modi! Repellat quos pariatur non perspiciatis consequuntur, esse temporibus! Tempora.</p>
+        </div>
+        <footer>&copy; 2024 Game Reviews Hub. All rights reserved.</footer>
+    </div>
+</body>
+</html>

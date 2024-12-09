@@ -1,18 +1,16 @@
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import render
 
+from .functions import top_games_images
 from .models import Review
 
-
-# def detail(request, game_id):
-#     game = get_object_or_404(Game, pk=game_id)
-#     return render(request, "detail.html", {"game": game})
-
-
 def index(request):
-    latest_reviews_list = Review.objects.order_by("-timestamp")[:5]
-    context = {"latest_reviews_list": latest_reviews_list}
-    return render(request, "index.html", context)
+    top_games_image_list = top_games_images()
+    latest_reviews_list = Review.objects.order_by('-timestamp')[:5]
+    context = {
+        'latest_reviews_list': latest_reviews_list,
+        'top_games_image_list': top_games_image_list}
+    return render(request, 'index.html', context)
 
 def detail(request, parent_asin):
     return HttpResponse("You're looking at game %s." % parent_asin)
