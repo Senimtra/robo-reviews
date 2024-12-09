@@ -6,141 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Reviews</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #1a1a2e; /* Dark violet background */
-            color: #ececec; /* Light text for contrast */
-            font-family: 'Arial', sans-serif;
-        }
-
-        .navbar {
-            background-color: #2d2d44;
-            border-bottom-left-radius: 15px;
-            border-bottom-right-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            max-width: 900px;
-            margin: auto;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .navbar-brand, .nav-link {
-            color: #ececec !important;
-        }
-
-        .navbar-brand:hover, .nav-link:hover {
-            color: #d9b3ff !important;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #2d2d44; /* Slightly lighter dark tone for contrast */
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
-        }
-
-        .header-image {
-            width: 100%;
-            border-radius: 15px;
-        }
-
-        .header-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin: 20px 0;
-            font-weight: bold;
-            color: #d9b3ff; /* Violet tone */
-        }
-
-        .review-card {
-            background-color: #3b3b5e; /* Subtle card contrast */
-            margin-bottom: 20px;
-            border-radius: 10px;
-            padding: 20px 20px 5px 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-        }
-
-        .review-card:hover {
-            transform: translateY(-5px);
-            transition: all 0.3s ease;
-        }
-
-        .btn-custom {
-            background-color: #6b52a7; /* Violet button color */
-            border: none;
-            color: #fff;
-            border-radius: 20px;
-            padding: 10px 20px;
-            text-align: center;
-            display: block;
-            margin: 0 auto;
-        }
-
-        .btn-games {
-            background-color: #6b52a7; /* Violet button color */
-            border: none;
-            color: #fff;
-            border-radius: 20px;
-            padding: 10px 20px;
-            text-align: center;
-        }
-
-        .btn-custom:hover {
-            background-color: #8a6dd1;
-        }
-
-        .btn-games:hover {
-            background-color: #8a6dd1;
-        }
-
-        .games-container {
-            display: flex;
-        }
-
-        .left {
-            flex: 3;
-        }
-
-        .right {
-            flex: 7;
-        }
-
-        .card-img {
-            object-fit: cover;
-            height: 5em;
-            border-radius: 5px;
-        }
-
-        .top-games {
-            border-radius: 10px;
-            background-color: #3b3b5e;
-            margin: 20px 0;
-            padding: 10px 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-        }
-
-        .summary-box {
-            height: 17em;
-            transition: all 0.5s ease;
-        }
-
-        .summary-box.expanded {
-            height: 50em;
-        }
-
-        .expandable {
-          height: 100%;
-        }
-
-        footer {
-            text-align: center;
-            margin: 20px 0;
-            color: #a2a2c1;
-        }
-    </style>
+    <link href="{% static 'styles/styles.css' %}" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar navbar-expand-sm">
@@ -188,6 +54,9 @@
                     <img src="{% static 'images/games_topic_1.png' %}" width="100%">
                 </div>
                 <div class="d-flex justify-content-end align-items-end" style="flex: 7;">
+                    Unleash Your Inner Warrior
+
+Step into the intense world of battle-centric games, where strategy, teamwork, and quick reflexes lead to victory. From fast-paced FPS titles like Call of Duty to strategic MOBAs like League of Legends, these games focus on defeating enemies, mastering tactics, and working with your team to dominate the battlefield. Ready to prove your skills? The fight begins now!
                     <button class="btn btn-games" onclick="expandSummary(this)">Explore!</button>
                 </div>
             </div>
@@ -220,8 +89,8 @@
         </div>
         <div class="review-card">
             <h3 class="card-title">Open Worlds and Discovery</h3>
-            <p class="card-text">Reflects games with a focus on story-driven adventures, open-world exploration,<br>
-                life simulation, survival, or sandbox-style gameplay.</p>
+            <p class="card-text">Reflects games with a focus on story-driven adventures,<br>
+                open-world exploration, life simulation, survival, or sandbox-style gameplay.</p>
             <div class="container summary-box d-flex">
                 <div class="card-body" style="flex: 3;">
                     <img src="{% static 'images/games_topic_4.png' %}" width="100%">
@@ -324,5 +193,10 @@
             summaryBox.classList.toggle('expanded');
         }
     </script>
+    <body>
+    <script type="module">
+        import { expandSummary } from "{% static 'js/scripts.js' %}";
+    </script>
+    </body>
 </body>
 </html>
