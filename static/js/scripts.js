@@ -1,7 +1,5 @@
-export function expandSummary(button) {
-    const summaryBox = button.closest('.summary-box');
-    const allSummaryBoxes = Array.from(document.getElementsByClassName('summary-box'));
-    const otherBoxes = allSummaryBoxes.filter(box => box !== summaryBox);
-    otherBoxes.forEach(box => box.classList.remove('expanded'));
-    summaryBox.classList.toggle('expanded');
+function collapseTopPicks(button) {
+    // Remove .show from class list to collapse opened containers
+    const collapseElements = document.querySelectorAll('.collapse.show');
+    collapseElements.forEach(element => {element.classList.remove('show')})
 }

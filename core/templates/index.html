@@ -1,319 +1,305 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Game Reviews</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+        <link href="{% static 'styles/styles.css' %}" rel="stylesheet" />
+    </head>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Game Reviews</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="{% static 'styles/styles.css' %}" rel="stylesheet" />
-</head>
-
-<body>
-    <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-sm">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Game Reviews</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#reviews">Reviews</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#games">Games</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#models">Models</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <div class="container">
-        <!-- Header Image -->
-        <img src="{% static 'images/robo_reviews_header.png' %}" alt="Gaming AI Robot" class="header-image" />
-
-        <!-- Top Games Section -->
-        <div class="top-games">
-            <div class="row">
-                {% for image in top_games_image_list %}
-                <div class="col-1 p-1">
-                    <div><img src="{{ image }}" class="card-img" /></div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-
-        <!-- Main Title -->
-        <h1 class="header-title">Finding Your New Adventure...</h1>
-
-        <!-- Combat-Focused Gameplay Section -->
-        <div class="body-card">
-            <h3 class="card-title">Combat-Focused Gameplay</h3>
-            <p class="card-text">
-                Represents games centered on battles, warfare, and multiplayer
-                combat.<br />
-                Includes FPS, tactical shooters, and MOBAs, with a focus on defeating
-                enemies and teamwork.
-            </p>
-            <div class="container summary-box">
-                <div class="summary-head d-flex">
-                    <!-- Image Section -->
-                    <div class="card-body summary-image" style="flex: 3">
-                        <img src="{% static 'images/games_topic_1.png' %}" width="100%" />
-                    </div>
-                    <!-- Content Section -->
-                    <div class="summary-content d-flex flex-column justify-content-between" style="flex: 7">
-                        <div>
-                            <h4><b>Unleash Your Inner Warrior</b></h4>
-                            <div>
-                                Step into the intense world of battle-centric games, where
-                                strategy, teamwork, and quick reflexes lead to victory.<br />From
-                                fast-paced FPS titles like Call of Duty to strategic MOBAs
-                                like League of Legends, these games focus on defeating
-                                enemies, mastering tactics, and working with your team to
-                                dominate the battlefield.<br />Ready to prove your skills? The
-                                fight begins now!
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <div>Games: {{ genre_all_games.CombatFocused }}</div>
-                            <div>Reviews: {{ genre_all_reviews.CombatFocused }}</div>
-                            <a class="btn summary-btn" data-bs-toggle="collapse" href="#collapseSummary1" role="button"
-                                aria-expanded="false" aria-controls="collapseSummary1">
-                                Top Picks
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Top Picks Collapse Section -->
-                <div class="collapse show" id="collapseSummary1">
-                    <hr class="w-100">
-                    <div class="container mt-5">
-                        <div class="row d-flex justify-content-between">
-                            {% for game in top_combat_picks %}
-                            <div class="col-md-4 d-flex">
-                                <div class="card flex-fill">
-                                    <img src="{{ game.images }}" class="card-img-top" alt="Game Image">
-                                </div>
-                            </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    <hr class="w-100">
-                    <div class="pro-text">{{ summarized_text.0|safe }}</div>
-                    <hr class="w-100">
-                    <div class="contra-text">{{ summarized_text.1|safe }}</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Additional Sections for Other Categories -->
-        <div class="body-card">
-            <h3 class="card-title">Engaging Simulated Worlds</h3>
-            <p class="card-text">
-                Encompasses games involving sports, racing, and team challenges,<br />
-                as well as simulation games like life management or vehicle-based
-                gameplay.
-            </p>
-            <div class="container summary-box d-flex">
-                <div class="card-body" style="flex: 3">
-                    <img src="{% static 'images/games_topic_2.png' %}" width="100%" />
-                </div>
-                <div class="d-flex justify-content-end align-items-end" style="flex: 7">
-                    <button class="btn btn-games" onclick="expandSummary(this)">
-                        Explore!
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Action and Tactical Strategy Section -->
-        <div class="body-card">
-            <h3 class="card-title">Action and Tactical Strategy</h3>
-            <p class="card-text">
-                Covers games with action-packed combat, exploration, and abilities,<br />
-                while also including strategic games where planning and tactical
-                execution are essential.
-            </p>
-            <div class="container summary-box d-flex">
-                <div class="card-body" style="flex: 3">
-                    <img src="{% static 'images/games_topic_3.png' %}" width="100%" />
-                </div>
-                <div class="d-flex justify-content-end align-items-end" style="flex: 7">
-                    <button class="btn btn-games" onclick="expandSummary(this)">
-                        Explore!
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Open Worlds Section -->
-        <div class="body-card">
-            <h3 class="card-title">Open Worlds and Discovery</h3>
-            <p class="card-text">
-                Reflects games with a focus on story-driven adventures,<br />
-                open-world exploration, life simulation, survival, or sandbox-style
-                gameplay.
-            </p>
-            <div class="container summary-box d-flex">
-                <div class="card-body" style="flex: 3">
-                    <img src="{% static 'images/games_topic_4.png' %}" width="100%" />
-                </div>
-                <div class="d-flex justify-content-end align-items-end" style="flex: 7">
-                    <button class="btn btn-games" onclick="expandSummary(this)">
-                        Explore!
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Models Section -->
-        <div id="models">
-            <h2>Models</h2>
-            <p>Used models and clustering techniques...</p>
-        </div>
-
-        <!-- Sentiment Analysis Section -->
-        <div class="body-card">
-            <h3 class="card-title">Review Sentiment Analysis</h3>
-            <p class="card-title">
-                <b>Classifying Positive, Neutral, and Negative Sentiments</b>
-            </p>
-            <p></p>
-            <p class="card-text">
-                This analysis is using DistilBERT in regression mode to predict a
-                single sentiment score. The regression output is categorized into
-                positive, neutral, or negative sentiments through binning.
-                <li>
-                    Deployed TinyBERT to ensure lightweight, efficient performance.
-                </li>
-                <li>
-                    Highlighting the model's decision-making by marking words or
-                    phrases.
-                </li>
-                <li>Monte Carlo Sampling for enhanced result stability.</li>
-            </p>
-            <div>
-                <div class="row">
-                    <img src="{% static 'images/sentiment_1.png' %}" />
-                </div>
-                <div>
-                    <p></p>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <img src="{% static 'images/sentiment_2.png' %}" class="img-fluid" alt="Image 1" />
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <img src="{% static 'images/sentiment_3.png' %}" class="img-fluid" alt="Image 2" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <p></p>
-        </div>
-
-        <!-- Clustering Section -->
-        <div class="body-card">
-            <h3 class="card-title">Clustering</h3>
-            <p class="card-title"><b>Clustering</b></p>
-            <div class="container my-4">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card-title">Topic 1</div>
-                        <div class="card">
-                            <div class="card-body">
-                                <img src="{% static 'images/topic_1.png' %}" width="100%" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card-title">Topic 2</div>
-                        <div class="card">
-                            <div class="card-body">
-                                <img src="{% static 'images/topic_2.png' %}" width="100%" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-6">
-                        <div class="card-title">Topic 3</div>
-                        <div class="card">
-                            <div class="card-body">
-                                <img src="{% static 'images/topic_3.png' %}" width="100%" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card-title">Topic 4</div>
-                        <div class="card">
-                            <div class="card-body">
-                                <img src="{% static 'images/topic_4.png' %}" width="100%" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <p class="card-text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui,
-                repellendus ipsa quam quibusdam quas, eaque eos ipsum dolorum eum,
-                perspiciatis modi! Repellat quos pariatur non perspiciatis
-                consequuntur, esse temporibus! Tempora.
-            </p>
-        </div>
-
-        <!-- Summarizing Section -->
-        <div class="body-card">
-            <h3 class="card-title">Summarizing</h3>
-            <p class="card-title"><b>Summarizing</b></p>
-            <p></p>
-            <p class="card-text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui,
-                repellendus ipsa quam quibusdam quas, eaque eos ipsum dolorum eum,
-                perspiciatis modi! Repellat quos pariatur non perspiciatis
-                consequuntur, esse temporibus! Tempora.
-            </p>
-        </div>
-
-        <!-- Footer -->
-        <footer>&copy; 2024 Game Reviews Hub. All rights reserved.</footer>
-    </div>
-
-    <!-- JavaScript Functions -->
-    <script>
-        function expandSummary(button) {
-            const summaryBox = button.closest(".summary-box");
-            const allSummaryBoxes = Array.from(
-                document.getElementsByClassName("summary-box")
-            );
-            const otherBoxes = allSummaryBoxes.filter((box) => box !== summaryBox);
-            otherBoxes.forEach((box) => box.classList.remove("expanded"));
-            summaryBox.classList.toggle("expanded");
-        }
-    </script>
+    <script src="{% static 'js/scripts.js' %}"></script>
 
     <body>
-        <!-- External Scripts -->
-        <script type="module">
-            import { expandSummary } from "{% static 'js/scripts.js' %}";
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    </body>
-</body>
+        <!-- Navigation Bar -->
+        <nav class="navbar navbar-expand-sm">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Game Reviews</a>
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav"
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#reviews">Reviews</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#games">Games</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#models">Models</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
 
+        <div class="container">
+            <!-- Header Image -->
+            <img
+                src="{% static 'images/robo_reviews_header.png' %}"
+                alt="Gaming AI Robot"
+                class="header-image"
+            />
+
+            <!-- Top Games Section -->
+            <div class="top-games">
+                <div class="row">
+                    {% for image in top_games_image_list %}
+                    <div class="col-1 p-1">
+                        <div><img src="{{ image }}" class="card-img" /></div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Main Title -->
+            <h1 class="header-title">Finding Your New Adventure...</h1>
+
+            <!-- Game Topic Cluster Section -->
+            {% for section in game_sections %}
+            <div class="body-card">
+                <h3 class="card-title">{{ section.0 }}</h3>
+                <!-- Topic title -->
+                <p class="card-text">{{ section.1|safe }}</p>
+                <!-- Topic decscription -->
+                <div class="container summary-box">
+                    <div class="summary-head d-flex">
+                        <!-- Image Section -->
+                        <div class="card-body summary-image" style="flex: 3">
+                            <img
+                                src="{% static 'images/games_topic_' %}{{ section.2 }}.png"
+                                width="100%"
+                            />
+                        </div>
+                        <!-- Content Section -->
+                        <div
+                            class="summary-content d-flex flex-column justify-content-between"
+                            style="flex: 7"
+                        >
+                            <div>{{ section.3|safe }}</div>
+                            <!-- Topic intro text -->
+                            <div class="d-flex justify-content-between">
+                                <div>Games: {{ section.4.0 }}</div>
+                                <!-- Topic game count -->
+                                <div>Reviews: {{ section.4.1 }}</div>
+                                <!-- Topic review count -->
+                                <a
+                                    class="btn summary-btn"
+                                    data-bs-toggle="collapse"
+                                    href="#collapseSummary{{ section.2 }}"
+                                    role="button"
+                                    aria-expanded="false"
+                                    aria-controls="collapseSummary{{ section.2 }}"
+                                    onclick="collapseTopPicks(this)"
+                                >
+                                    Top Picks
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Top Picks Collapse Section -->
+                    <div class="collapse" id="collapseSummary{{ section.2 }}">
+                        <hr class="w-100" />
+                        <div class="container mt-5">
+                            <div class="row d-flex justify-content-between">
+                                {% for images in section.5 %}
+                                <div class="col-md-4 d-flex">
+                                    <div class="card flex-fill">
+                                        <img
+                                            src="{{ images.1 }}"
+                                            class="card-img-top"
+                                            alt="Game Image"
+                                        />
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <hr class="w-100" />
+                        <!-- <div class="pro-text">{{ summarized_text.0|safe }}</div> -->
+                        <hr class="w-100" />
+                        <!-- <div class="contra-text">{{ summarized_text.1|safe }}</div> -->
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+            <!-- Models Section -->
+            <div id="models">
+                <h2>Models</h2>
+                <p>Used models and clustering techniques...</p>
+            </div>
+
+            <!-- Sentiment Analysis Section -->
+            <div class="body-card">
+                <h3 class="card-title">Review Sentiment Analysis</h3>
+                <p class="card-title">
+                    <b
+                        >Classifying Positive, Neutral, and Negative
+                        Sentiments</b
+                    >
+                </p>
+                <p></p>
+                <p class="card-text">
+                    This analysis is using DistilBERT in regression mode to
+                    predict a single sentiment score. The regression output is
+                    categorized into positive, neutral, or negative sentiments
+                    through binning.
+                    <li>
+                        Deployed TinyBERT to ensure lightweight, efficient
+                        performance.
+                    </li>
+                    <li>
+                        Highlighting the model's decision-making by marking
+                        words or phrases.
+                    </li>
+                    <li>Monte Carlo Sampling for enhanced result stability.</li>
+                </p>
+                <div>
+                    <div class="row">
+                        <img src="{% static 'images/sentiment_1.png' %}" />
+                    </div>
+                    <div>
+                        <p></p>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img
+                                src="{% static 'images/sentiment_2.png' %}"
+                                class="img-fluid"
+                                alt="Image 1"
+                            />
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <img
+                                        src="{% static 'images/sentiment_3.png' %}"
+                                        class="img-fluid"
+                                        alt="Image 2"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p></p>
+            </div>
+
+            <!-- Clustering Section -->
+            <div class="body-card">
+                <h3 class="card-title">Clustering</h3>
+                <p class="card-title"><b>Clustering</b></p>
+                <div class="container my-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card-title">Topic 1</div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <img
+                                        src="{% static 'images/topic_1.png' %}"
+                                        width="100%"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-title">Topic 2</div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <img
+                                        src="{% static 'images/topic_2.png' %}"
+                                        width="100%"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <div class="card-title">Topic 3</div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <img
+                                        src="{% static 'images/topic_3.png' %}"
+                                        width="100%"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-title">Topic 4</div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <img
+                                        src="{% static 'images/topic_4.png' %}"
+                                        width="100%"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="card-text">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Qui, repellendus ipsa quam quibusdam quas, eaque eos ipsum
+                    dolorum eum, perspiciatis modi! Repellat quos pariatur non
+                    perspiciatis consequuntur, esse temporibus! Tempora.
+                </p>
+            </div>
+
+            <!-- Summarizing Section -->
+            <div class="body-card">
+                <h3 class="card-title">Summarizing</h3>
+                <p class="card-title"><b>Summarizing</b></p>
+                <p></p>
+                <p class="card-text">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Qui, repellendus ipsa quam quibusdam quas, eaque eos ipsum
+                    dolorum eum, perspiciatis modi! Repellat quos pariatur non
+                    perspiciatis consequuntur, esse temporibus! Tempora.
+                </p>
+            </div>
+
+            <!-- Footer -->
+            <footer>&copy; 2024 Game Reviews Hub. All rights reserved.</footer>
+        </div>
+
+        <!-- JavaScript Functions -->
+        <script>
+            function expandSummary(button) {
+                const summaryBox = button.closest(".summary-box");
+                const allSummaryBoxes = Array.from(
+                    document.getElementsByClassName("summary-box")
+                );
+                const otherBoxes = allSummaryBoxes.filter(
+                    (box) => box !== summaryBox
+                );
+                otherBoxes.forEach((box) => box.classList.remove("expanded"));
+                summaryBox.classList.toggle("expanded");
+            }
+        </script>
+
+        <body>
+            <!-- External Scripts -->
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+        </body>
+    </body>
 </html>

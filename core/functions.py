@@ -29,11 +29,15 @@ def count_ratings_games():
     genres_game_count = Genre.objects.values('genre').annotate(game_count=Count('game'))
     # Annotate genres with the count of reviews
     genres_reviews_count = Genre.objects.values('genre').annotate(review_count=Count('game__review'))
-    # Create a dictionary for game counts
-    games_count = {''.join(entry['genre'].split('-')).split(' ')[0]: entry['game_count'] for entry in genres_game_count}
-    # Create a dictionary for review counts
-    reviews_count = {''.join(entry['genre'].split('-')).split(' ')[0]: entry['review_count'] for entry in genres_reviews_count}
-    return games_count, reviews_count
+    # Create a dictionary for games count
+    games_count = {genre['genre']: genre['game_count'] for genre in genres_game_count}
+    # Create a dictionary for reviews count
+    reviews_count = {genre['genre']: genre['review_count'] for genre in genres_reviews_count}
+    # Index view game topic order
+    topic_order = ['Combat-Focused Gameplay', 'Engaging Simulated Worlds', 'Action and Tactical Strategy', 'Open Worlds and Discovery']
+    # Set up game/review count tuple
+    games_and_reviews_count = [(games_count[topic], reviews_count[topic]) for topic in topic_order]
+    return games_and_reviews_count
 
 
 # Function to get top-rated combat-focused games
@@ -44,10 +48,58 @@ def top_combat_picks():
                       review_count=Count('review'))       # Count of reviews
             .annotate(average_rating=F('total_rating') / F('review_count'),  # Compute average rating
                       short_description=Substr('description', 1, 10))  # Get the first 10 characters of the description
-            .order_by('-average_rating')[1:4]
+            .order_by('-average_rating')[:30]
             .values('title', 'average_rating', 'images', 'price', 'parent_asin', 'short_description')  # Include fields
     )
-    return top_games
+    top_games_list = [(game['title'], game['images'], game['price'], game['parent_asin'], game['average_rating'], 
+                       game['short_description']) for i, game in enumerate(top_games) if i in [1, 2, 3]]  # cover selection
+    return top_games_list
+
+
+# Function to get top-rated simulation-focused games
+def top_sim_picks():
+    top_games = (
+        Game.objects.filter(genre__genre='Engaging Simulated Worlds')
+            .annotate(total_rating=Sum('review__rating'),  # Sum of ratings
+                      review_count=Count('review'))       # Count of reviews
+            .annotate(average_rating=F('total_rating') / F('review_count'),  # Compute average rating
+                      short_description=Substr('description', 1, 10))  # Get the first 10 characters of the description
+            .order_by('-average_rating')[:30]
+            .values('title', 'average_rating', 'images', 'price', 'parent_asin', 'short_description')  # Include fields
+    )
+    top_games_list = [(game['title'], game['images'], game['price'], game['parent_asin'], game['average_rating'], 
+                       game['short_description']) for i, game in enumerate(top_games) if i in [5, 6, 7]]  # cover selection
+    return top_games_list
+
+# Function to get top-rated action and tactical strategy games
+def top_tact_picks():
+    top_games = (
+        Game.objects.filter(genre__genre='Action and Tactical Strategy')
+            .annotate(total_rating=Sum('review__rating'),  # Sum of ratings
+                      review_count=Count('review'))       # Count of reviews
+            .annotate(average_rating=F('total_rating') / F('review_count'),  # Compute average rating
+                      short_description=Substr('description', 1, 10))  # Get the first 10 characters of the description
+            .order_by('-average_rating')[:30]
+            .values('title', 'average_rating', 'images', 'price', 'parent_asin', 'short_description')  # Include fields
+    )
+    top_games_list = [(game['title'], game['images'], game['price'], game['parent_asin'], game['average_rating'], 
+                       game['short_description']) for i, game in enumerate(top_games) if i in [1, 6, 16]]  # cover selection
+    return top_games_list
+
+# Function to get top-rated open worlds and discovery games
+def top_disco_picks():
+    top_games = (
+        Game.objects.filter(genre__genre='Action and Tactical Strategy')
+            .annotate(total_rating=Sum('review__rating'),  # Sum of ratings
+                      review_count=Count('review'))       # Count of reviews
+            .annotate(average_rating=F('total_rating') / F('review_count'),  # Compute average rating
+                      short_description=Substr('description', 1, 10))  # Get the first 10 characters of the description
+            .order_by('-average_rating')[:30]
+            .values('title', 'average_rating', 'images', 'price', 'parent_asin', 'short_description')  # Include fields
+    )
+    top_games_list = [(game['title'], game['images'], game['price'], game['parent_asin'], game['average_rating'], 
+                       game['short_description']) for i, game in enumerate(top_games) if i in [20, 24, 25]]  # cover selection
+    return top_games_list
 
 
 # Function to generate blog post texts using OpenAI's API
