@@ -4,6 +4,8 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name = 'index'),
+    # Sentiment classification
+    path('predict/', views.predict, name = 'predict'),
     # ex: /
     path('<str:parent_asin>/', views.detail, name = 'detail'),
     # ex: /B00XY0IVK4/reviews/

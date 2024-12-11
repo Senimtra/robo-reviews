@@ -18,7 +18,10 @@ body {
     z-index: 1000;
 }
 
-.navbar-brand,
+.navbar-brand {
+    color: #ececec !important;
+}
+
 .nav-link {
     color: #ececec !important;
 }
@@ -46,7 +49,7 @@ body {
 
 .header-title {
     text-align: center;
-    font-size: 2.5rem;
+    font-size: 2rem;
     margin: 20px 0;
     font-weight: bold;
     color: #d9b3ff; /* Violet tone */
@@ -176,4 +179,21 @@ footer {
 
 .contra-text b {
     color: red;
+}
+
+/* Review section styles */
+.review-box {
+    border-radius: 10px;
+    background-color: #3b3b5e;
+    margin: 20px 0;
+    padding: 10px 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.review-buttons {
+    border: 1px solid red;
+}
+
+.review-results {
+    /* height: 12.4em; */
 }

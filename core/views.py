@@ -1,10 +1,13 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 
 # Import functions to handle business logic
 from .functions import top_games_images, count_ratings_games, top_combat_picks, top_sim_picks
 from .functions import top_tact_picks, top_disco_picks, summarize_reviews
 from .models import Review
+
+import requests
+import json
 
 
 # Main index view to display game-related information
@@ -83,6 +86,35 @@ def index(request):
     
     # Render the 'index.html' template with the provided context
     return render(request, 'index.html', context)
+
+
+
+def predict(request):
+    if request.method == "POST":
+            data = json.loads(request.body)
+            review = data.get("review", "")
+
+            external_url = "http://127.0.0.1:5000/predict"
+
+            # POST request
+            response = requests.post(
+                external_url,
+                json={"review": review},
+                headers={"Content-Type": "application/json"}
+            )
+
+            # Return the response from the external server
+            if response.status_code == 200:
+                external_response = response.json()
+                print(external_response)
+                return JsonResponse({"success": True, "data": external_response})
+            else:
+                return JsonResponse(
+                    {"success": False, "error": "Failed to fetch from external server"},
+                    status=response.status_code,
+                )
+
+    return JsonResponse({"error": "Invalid request method"}, status=405)
 
 
 # Detail view for a specific game
