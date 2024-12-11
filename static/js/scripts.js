@@ -20,6 +20,28 @@ const getCookie = (name) => {
 // Get the CSRF token
 const csrftoken = getCookie("csrftoken");
 
+// Function to get example reviews
+const getReview = (button) => {
+    // Desired sentiment
+    sentiment = button.innerText;
+
+    // Send the POST request
+    fetch("/review/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": csrftoken,
+        },
+        body: JSON.stringify({ sentiment: sentiment }),
+    })
+        .then((response) => response.json())
+        .then((result) => {
+            // Display example review in textarea
+            document.getElementById("review-input").innerText =
+                result.review;
+        });
+};
+
 // Function to handle prediction
 const getPrediction = () => {
     // Get text from the input box

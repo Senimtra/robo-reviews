@@ -102,6 +102,25 @@ def top_disco_picks():
     return top_games_list
 
 
+# Function to generate example reviews for sentiment analysis using OpenAI's API
+def get_example_review(sentiment):
+    completion = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "system", "content": "You are a video game enthusiast."},
+            {
+                "role": "user",
+                "content": f"""Generate a short video game review. 
+                It can be any length but not more than 30 words. 
+                Make very sure, that its sentiment is: {sentiment}"""
+            }
+        ]
+    )
+    # Return generated review text
+    example_review = completion.choices[0].message.content
+    return example_review
+
+
 # Function to generate blog post texts using OpenAI's API
 def summarize_reviews(games):
     completion = client.chat.completions.create(

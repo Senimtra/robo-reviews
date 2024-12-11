@@ -3,7 +3,7 @@ from django.shortcuts import render
 
 # Import functions to handle business logic
 from .functions import top_games_images, count_ratings_games, top_combat_picks, top_sim_picks
-from .functions import top_tact_picks, top_disco_picks, summarize_reviews
+from .functions import top_tact_picks, top_disco_picks, get_example_review, summarize_reviews
 from .models import Review
 
 import requests
@@ -88,47 +88,37 @@ def index(request):
     return render(request, 'index.html', context)
 
 
-
+# Get sentiment prediction
 def predict(request):
     if request.method == "POST":
-            data = json.loads(request.body)
-            review = data.get("review", "")
-
-            external_url = "http://127.0.0.1:5000/predict"
-
-            # POST request
-            response = requests.post(
-                external_url,
-                json={"review": review},
-                headers={"Content-Type": "application/json"}
+        data = json.loads(request.body)
+        review = data.get("review", "")
+        external_url = "http://127.0.0.1:5000/predict"
+        # POST request
+        response = requests.post(
+            external_url,
+            json={"review": review},
+            headers={"Content-Type": "application/json"}
+        )
+        # Return response from external server
+        if response.status_code == 200:
+            external_response = response.json()
+            print(external_response)
+            return JsonResponse({"success": True, "data": external_response})
+        else:
+            return JsonResponse(
+                {"success": False, "error": "Failed to fetch from external server"},
+                status=response.status_code,
             )
-
-            # Return the response from the external server
-            if response.status_code == 200:
-                external_response = response.json()
-                print(external_response)
-                return JsonResponse({"success": True, "data": external_response})
-            else:
-                return JsonResponse(
-                    {"success": False, "error": "Failed to fetch from external server"},
-                    status=response.status_code,
-                )
-
     return JsonResponse({"error": "Invalid request method"}, status=405)
 
 
-# Detail view for a specific game
-def detail(request, parent_asin):
-    # Return a simple HTTP response displaying the game's parent ASIN
-    return HttpResponse("You're looking at game %s." % parent_asin)
-
-# Reviews view for a specific game
-def reviews(request, parent_asin):
-    # Return a simple HTTP response displaying reviews for the game
-    response = "You're looking at the reviews for game %s."
-    return HttpResponse(response % parent_asin)
-
-# Genre view for a specific game
-def genre(request, parent_asin):
-    # Return a simple HTTP response displaying the game's genre
-    return HttpResponse("You're looking at the genre of game %s." % parent_asin)
+# Get example reviews
+def review(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        sentiment = data.get('sentiment', '')
+        # Request review from api
+        review = get_example_review(sentiment).strip('"')
+        context = {'review': review}
+    return JsonResponse(context)
