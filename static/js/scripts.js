@@ -37,8 +37,7 @@ const getReview = (button) => {
         .then((response) => response.json())
         .then((result) => {
             // Display example review in textarea
-            document.getElementById("review-input").innerText =
-                result.review;
+            document.getElementById("review-input").innerText = result.review;
         });
 };
 
@@ -63,13 +62,6 @@ const getPrediction = () => {
                 result.data.token_scores,
                 result.data.confidence,
                 result.data.sentiment
-            );
-
-            // Display sentiment and confidence in the UI
-            document.getElementById("sentiment-result").innerText =
-                result.data.sentiment;
-            document.getElementById("confidence-result").innerText = Number(
-                result.data.confidence.toFixed(2)
             );
         });
 };
@@ -124,16 +116,21 @@ const setupAttention = (scores, confidence, sentiment) => {
             red = normalized_att[i];
         } else {
             // Neutral sentiment
-            green = 0;
-            red = 0;
-            blue = normalized_att[i];
+            green = normalized_att[i] - 18;
+            red = normalized_att[i];
+            blue = 0;
         }
         html_text += `<span style="background-color: rgb(${red}, ${green}, ${blue});">&nbsp;&nbsp;${token}&nbsp;&nbsp;</span> `;
     }
 
-    // Update attention visualization in the UI
+    // Update attention visualization in UI
     html_text = `<p>${html_text.trim()}</p>`;
     document.getElementById("attention-result").innerHTML = html_text;
+
+    // Show confidence level in UI
+    document.getElementById(
+        "confidence"
+    ).innerHTML = `Confidence Level: ${confidence.toFixed(2)}%`;
 };
 
 // Function to collapse all other accordions when one is opened

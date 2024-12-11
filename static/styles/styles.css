@@ -85,6 +85,10 @@ body {
     background-color: #8a6dd1; /* Hover effect for buttons */
 }
 
+.btn-group {
+    height: 2.75em;
+}
+
 /* Layout styles for games */
 .games-container {
     display: flex;
@@ -194,6 +198,45 @@ footer {
     border: 1px solid red;
 }
 
+#review-input {
+    background-image: url('/static/images/sentiment_background.png');
+    background-size: cover;
+}
+
+#review-input::placeholder {
+    padding-top: 3em;
+    text-align: center;
+    font-size: 115%;
+    color: #e1e1ff;
+    /* color:purple; */
+    opacity: 1;
+}
+
 .review-results {
-    /* height: 12.4em; */
+    height: 16.9em;
+}
+
+.review-results-form {
+    margin: 0;
+}
+
+.review-results-text {
+    height: 12.8em;
+    overflow: hidden;
+    background-image: url('/static/images/sentiment_background.png');
+    background-size: cover;
+}
+
+
+.sentiment-metrics.block {
+    margin-right: 0.9em;
+    width: 86%;
+}
+
+.sentiment-metrics.block img:first-of-type {
+    margin-bottom: 0.9em;
+} 
+
+.sentiment-metrics.matrix img {
+    border-radius: 0.3em;
 }

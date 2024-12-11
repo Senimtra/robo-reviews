@@ -45,7 +45,7 @@
         <img src="{% static 'images/robo_reviews_header.png' %}" alt="Gaming AI Robot" class="header-image" />
 
         <h1 class="header-title" id="reviews">BERT-Based Sentiment Binning</h1>
-        
+
         <!-- Top Games Section -->
         <div class="top-games">
             <div class="row">
@@ -59,26 +59,24 @@
 
         <div class="container mt-4 py-3 review-box">
             <div class="row">
-                <!-- Card 1 with Textarea -->
+                <!-- Game Review Text Input -->
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Game Review Text</h5>
-                            <textarea id="review-input" class="form-control" rows="5"
-                                placeholder="Enter your text here..."></textarea>
+                            <textarea id="review-input" class="form-control" rows="8"
+                                placeholder="Share your game review or let me generate a random one for you! ✍️"></textarea>
                         </div>
                     </div>
                 </div>
 
-                <!-- Dummy Card -->
+                <!-- Game Review Sentiment Results -->
                 <div class="col-md-6">
                     <div class="card review-results">
                         <div class="card-body">
                             <h5 class="card-title">Prediction Results</h5>
-                            <p class="card-text">
-                            <div id="attention-result" class="form-control attention"></div>
-                            <p id="sentiment">Review Sentiment:<span id="sentiment-result"></span></p>
-                            <p id="confidence">Confidence Level:<span id="confidence-result"></span></p>
+                            <p class="card-text review-results-form">
+                            <div id="attention-result" class="form-control review-results-text"></div>
                             </p>
                         </div>
                     </div>
@@ -87,12 +85,14 @@
             <div class="row">
                 <div class="col-md-12 d-flex justify-content-between align-items-end">
                     <div class="btn-group mt-4 text-center" role="group" aria-label="Basic example">
+                        <button type="button" class="btn disabled">Random Review</button>
                         <button type="button" class="btn btn-success" onclick="getReview(this)">Positive</button>
                         <button type="button" class="btn btn-warning" onclick="getReview(this)">Neutral</button>
                         <button type="button" class="btn btn-danger" onclick="getReview(this)">Negative</button>
                     </div>
-                    <div>
-                        <button class="btn btn-primary" onclick="getPrediction()">Get Prediction</button>
+                    <div class="d-flex">
+                        <button class="btn disabled me-4" id="confidence">Confidence Level: 00.00%</button>
+                        <button class="btn btn-custom" onclick="getPrediction()">Get Prediction</button>
                     </div>
                 </div>
             </div>
@@ -100,48 +100,42 @@
 
         <!-- Sentiment Analysis Section -->
         <div class="body-card">
-            <h3 class="card-title">Review Sentiment Analysis</h3>
-            <p class="card-title">
-                <b>Classifying Positive, Neutral, and Negative
-                    Sentiments</b>
+            <h2 class="mb-4">Sentiment Analysis Results</h2>
+            <p><b>GOAL: </b> Classify reviews into <span class="text-success"><b>positive</b></span>, <span
+                    class="text-warning"><b>neutral</b></span>, and <span class="text-danger"><b>negative</b></span>
+                sentiments.<br>
+                <b>CHALLENGE: </b> Dataset ratings (1–5) didn’t align with 3 labels and had a skewed distribution.
             </p>
-            <p></p>
-            <p class="card-text">
-                This analysis is using DistilBERT in regression mode to
-                predict a single sentiment score. The regression output is
-                categorized into positive, neutral, or negative sentiments
-                through binning.
-                <li>
-                    Deployed TinyBERT to ensure lightweight, efficient
-                    performance.
+            <h4>Training Process and Results</h4>
+            <ul>
+                <li><strong>Model Approach:</strong> Trained <em><b>DistilBERT</b></em> to predict continuous sentiment
+                    scores
+                    (1–5).
                 </li>
-                <li>
-                    Highlighting the model's decision-making by marking
-                    words or phrases.
-                </li>
-                <li>Monte Carlo Sampling for enhanced result stability.</li>
-            </p>
-            <div>
-                <div class="row">
-                    <img src="{% static 'images/sentiment_1.png' %}" />
-                </div>
-                <div>
-                    <p></p>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <img src="{% static 'images/sentiment_2.png' %}" class="img-fluid" alt="Image 1" />
+                <li><strong>Post-Processing:</strong> Binned predictions into 3 sentiment categories (positive,
+                    neutral,
+                    negative).</li>
+                <li class="mt-1"><strong>Training Accuracy (5 Bins):</strong> Achieved <b>83%</b> accuracy during
+                    testing.</li>
+                <li><strong>Validation Accuracy (3 Bins):</strong> Improved to <b class="text-success">91%</b> on
+                    generated reviews.</li>
+                <li class="mt-1"><strong>Confidence Level:</strong> Calculated using <em>Monte Carlo Sampling</em> with
+                    10 iterations.</li>
+                </p>
+                <p></p>
+                <p></p>
+            </ul>
+            <div class="container">
+                <div class="card-body d-flex">
+                    <div class="sentiment-metrics block">
+                        <img src="{% static 'images/sentiment_2.png' %}" class="img-fluid" />
+                        <img src="{% static 'images/sentiment_1.png' %}" class="img-fluid" />
                     </div>
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <img src="{% static 'images/sentiment_3.png' %}" class="img-fluid" alt="Image 2" />
-                            </div>
-                        </div>
+                    <div class="sentiment-metrics matrix">
+                        <img src="{% static 'images/sentiment_3.png' %}" class="img-fluid" />
                     </div>
                 </div>
             </div>
-            <p></p>
         </div>
 
         <h1 class="header-title" id="games">Finding your new Adventure...</h1>
