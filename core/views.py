@@ -10,32 +10,31 @@ import requests
 import json
 
 
+# Fetch top combat game picks
+top_combat_game_picks = top_combat_picks()
+# Fetch top simulation game picks
+top_sim_game_picks = top_sim_picks()
+# Fetch top action and tactical strategy games
+top_tact_game_picks = top_tact_picks()
+# Fetch top open worlds and discovery games
+top_disco_game_picks = top_disco_picks()
+
+
+# Extract the titles of the top games for summarization
+summ_combat = [game[0] for game in top_combat_game_picks]
+summ_sim = [game[0] for game in top_sim_game_picks]
+summ_tact = [game[0] for game in top_tact_game_picks]
+summ_disco = [game[0] for game in top_disco_game_picks]
+
+summ_titles = [summ_combat, summ_sim, summ_tact, summ_disco]
+
+
 # Main index view to display game-related information
 def index(request):
 
-    # Fetch top combat game picks for display
-    top_combat_game_picks = top_combat_picks()
-    # Fetch top simulation game picks for display
-    top_sim_game_picks = top_sim_picks()
-    # Fetch top action and tactical strategy games
-    top_tact_game_picks = top_tact_picks()
-    # Fetch top open worlds and discovery games
-    top_disco_game_picks = top_disco_picks()
     # Set up top pick game details
     top_pick_games = [top_combat_game_picks, top_sim_game_picks, 
                       top_tact_game_picks, top_disco_game_picks]
-
-    # Extract the titles of the top games for summarization
-    summ_combat = [game[0] for game in top_combat_game_picks]
-    summ_sim = [game[0] for game in top_sim_game_picks]
-    summ_tact = [game[0] for game in top_tact_game_picks]
-    summ_disco = [game[0] for game in top_disco_game_picks]
-
-    # Generate blog-style summaries for the top games
-    # summarized_combat = summarize_reviews(summ_combat)
-    # summarized_sim = summarize_reviews(summ_sim)
-    # summarized_tact = summarize_reviews(summ_tact)
-    # summarized_disco = summarize_reviews(summ_disco)
 
     # # Fetch the list of images for the top-rated games
     top_games_image_list = top_games_images()
@@ -122,4 +121,13 @@ def review(request):
         # Request review from api
         review = get_example_review(sentiment).strip('"')
         context = {'review': review}
+    return JsonResponse(context)
+
+
+# Get summarization texts
+def summarization(request):
+    if request.method == 'POST':
+        topic = json.loads(request.body)['topic']
+        summarized_texts = summarize_reviews(summ_titles[topic])
+        context = {'summarization': summarized_texts}
     return JsonResponse(context)

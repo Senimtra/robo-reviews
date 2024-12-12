@@ -159,3 +159,26 @@ function collapseTopPicks() {
         });
     });
 }
+
+// Function to get top combat games summarization
+const getSummarization = (i) => {
+    // Send the POST request
+    fetch("/summarization/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": csrftoken,
+        },
+        body: JSON.stringify({ topic: i }),
+    })
+        .then((response) => response.json())
+        .then((result) => {
+            const topic = i + 1;
+            document.querySelector(`#summ-pro-${topic}`).innerHTML = result.summarization[0];
+            document.querySelector(`#summ-contra-${topic}`).innerHTML = result.summarization[1];
+        });
+};
+
+for (i = 0; i < 4; i++) {
+    getSummarization(i);
+}

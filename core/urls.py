@@ -9,4 +9,6 @@ urlpatterns = [
     path('review/', views.review, name = 'review'),
     # Sentiment classification
     path('predict/', views.predict, name = 'predict'),
+    # Sentiment classification
+    path('summarization/', views.summarization, name = 'summarization'),
     ]
