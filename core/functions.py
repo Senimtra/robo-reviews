@@ -108,26 +108,31 @@ def top_disco_picks():
     return top_games_list
 
 
-# Function to generate example reviews for sentiment analysis using OpenAI's API
+# Function to generate example reviews for sentiment analysis
 def get_example_review(sentiment):
+    """
+    Generates a (positive/neutral/negative) review
+    """
     completion = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[
             {"role": "system", "content": "You are a video game enthusiast."},
             {
                 "role": "user",
-                "content": f"""Generate a short video game review. 
-                It can be any length but not more than 30 words. 
-                Make very sure, that its sentiment is: {sentiment}"""
+                "content": (
+                    f"Generate a short video game review. "
+                    f"It can be any length but not more than 30 words. "
+                    f"Make very sure that its sentiment is: {sentiment}."
+                )
             }
         ]
     )
-    # Return generated review text
+    # Extract and return the generated review
     example_review = completion.choices[0].message.content
     return example_review
 
 
-# Function to generate blog post texts using OpenAI's API
+# Function to generate pro/contra blog post texts
 def summarize_reviews(games):
     completion = client.chat.completions.create(
         model="gpt-3.5-turbo",
@@ -135,20 +140,21 @@ def summarize_reviews(games):
             {"role": "system", "content": "You are a professional video game blog writer."},
             {
                 "role": "user",
-                "content": f"""Generate two separate blog post texts (##BLOG1##, ##BLOG2##), 
-                each close to but not more than 100 words. Make sure, that the following 
-                games are mentioned in every text only once:
-                - {games[0]}
-                - {games[1]}
-                - {games[2]}
-                The first text should explain why people love playing these video games. 
-                Highlight each game title using <b> tags in the text.
-                The second text should explain why people do not like playing these same games, 
-                again highlighting each game title using <b> tags."""
+                "content": (
+                    "Generate two separate blog post texts (##BLOG1##, ##BLOG2##), "
+                    "each close to but not more than 100 words. Make sure that the following "
+                    "games are mentioned in every text only once:\n"
+                    f"- {games[0]}\n"
+                    f"- {games[1]}\n"
+                    f"- {games[2]}\n"
+                    "The first text should explain why people love playing these video games. "
+                    "Highlight each game title using <b> tags in the text.\n"
+                    "The second text should explain why people do not like playing these same games, "
+                    "again highlighting each game title using <b> tags."
+                )
             }
         ]
     )
-    # print(completion.choices[0])
     # Parse the API response into two separate blog posts
     blogs = completion.choices[0].message.content.split("##BLOG2##")
     blog1 = blogs[0].replace("##BLOG1##", "").strip()

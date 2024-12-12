@@ -17,7 +17,7 @@
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-sm">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Game Reviews</a>
+            <a class="navbar-brand" href="#">RoboReviews</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -63,7 +63,7 @@
                 <!-- Game Review Text Input -->
                 <div class="col-md-6">
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body body-card-dark">
                             <h5 class="card-title">Game Review Text</h5>
                             <textarea id="review-input" class="form-control" rows="8"
                                 placeholder="Share your game review or let me generate a random one for you! ✍️"></textarea>
@@ -87,13 +87,13 @@
             <div class="row">
                 <div class="col-md-12 d-flex justify-content-between align-items-end">
                     <div class="btn-group mt-4 text-center" role="group" aria-label="Basic example">
-                        <button type="button" class="btn disabled">Random Review</button>
+                        <button type="button" class="btn btn-dark disabled">Random Review</button>
                         <button type="button" class="btn btn-success" onclick="getReview(this)">Positive</button>
                         <button type="button" class="btn btn-warning" onclick="getReview(this)">Neutral</button>
                         <button type="button" class="btn btn-danger" onclick="getReview(this)">Negative</button>
                     </div>
                     <div class="d-flex">
-                        <button class="btn disabled me-4" id="confidence">Confidence Level: 00.00%</button>
+                        <button class="btn btn-dark disabled me-4" id="confidence">Confidence Level: 00.00%</button>
                         <button class="btn btn-custom" onclick="getPrediction()">Get Prediction</button>
                     </div>
                 </div>
@@ -102,13 +102,13 @@
 
         <!-- Sentiment Analysis Section -->
         <div class="body-card">
-            <h2 class="mb-4">Sentiment Analysis: Implementation</h2>
+            <h2 class="mb-4 implementation">Sentiment Analysis: Implementation</h2>
             <p><b>GOAL: </b> Classify reviews into <span class="text-success"><b>positive</b></span>, <span
                     class="text-warning"><b>neutral</b></span>, and <span class="text-danger"><b>negative</b></span>
                 sentiments.<br>
                 <b>CHALLENGE: </b> Dataset ratings (1–5) didn’t align with 3 labels and had a skewed distribution.
             </p>
-            <h4>Training Process and Results</h4>
+            <h4 class="implementation">Training Process and Results</h4>
             <ul>
                 <li><strong>Model Approach:</strong> Trained <em><b>DistilBERT</b></em> to predict continuous sentiment
                     scores
@@ -210,7 +210,7 @@
         </div>
 
         <!-- Clustering & Summarization Section -->
-        <h1 class="header-title" id="summarization-section">Clustering & Summarization Techniques</h1>
+        <h1 class="header-title">Clustering & Summarization Techniques</h1>
 
         <!-- Top Games Cover Section 3 -->
         <div class="top-games">
@@ -225,13 +225,13 @@
 
         <!-- Clustering Section -->
         <div class="body-card">
-            <h2 class="mb-4">Topic Modeling: Implementation</h2>
+            <h2 class="mb-4 implementation">Topic Modeling: Implementation</h2>
             <p><b>GOAL: </b> Reduce <b><em>23 game genres</em></b> into main clusters for analysis and
                 categorization.<br>
                 <b>CHALLENGE: </b> Reducing genres to <em><b>distinct & meaningful clusters</b></em> while
                 <u>preserving interpretability</u>.
             </p>
-            <h4>Latent Dirichlet allocation (LDA)</h4>
+            <h4 class="implementation">Latent Dirichlet allocation (LDA)</h4>
             <ul>
                 <li><strong>Stopwords List:</strong> Fine-tuned to exclude irrelevant words and improve the
                     clarity of clusters.</li>
@@ -308,12 +308,12 @@
         </div>
 
         <!-- Summarizing Section -->
-        <div class="body-card">
-            <h2 class="mb-4">Text Summarization: Implementation</h2>
+        <div class="body-card" id="summarization-section">
+            <h2 class="mb-4 implementation">Text Summarization: Implementation</h2>
             <p><b>GOAL: </b> Summarizing the top 3 games per cluster into pros and cons.<br>
                 <b>CHALLENGE: </b> Ensuring the summarization processes every game consistently.
             </p>
-            <h4>OpenAI API Integration</h4>
+            <h4 class="implementation">OpenAI API Integration</h4>
             <ul>
                 <li><strong>Model Selection:</strong> Focused on improving inference speed.</li>
                 <li><strong>Token Optimization:</strong> Reduced costs and ensured prompt efficiency.</li>
@@ -324,6 +324,26 @@
                     </ul>
                 </li>
             </ul>
+            <div class="container my-4">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body topic-visualization">
+                                <div class="btn btn-sm disabled">Summarization</div>
+                                <img src="{% static 'images/api_summarization.png' %}" width="100%" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body topic-visualization">
+                                <div class="btn btn-sm disabled">Random Review</div>
+                                <img src="{% static 'images/api_reviews.png' %}" width="100%" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Footer -->
