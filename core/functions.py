@@ -14,13 +14,16 @@ client = openai.OpenAI()
 # Function to fetch images of top-rated games
 def top_games_images():
     # Annotate games with their average rating, order by rating in descending order, and fetch the top 55
-    top_games = Game.objects.annotate(avg_rating=Avg('review__rating')).order_by('-avg_rating').values('images')[:55]
+    top_games = Game.objects.annotate(avg_rating=Avg('review__rating')).order_by('-avg_rating').values('images')[:151]
     # Specific indices of games to select covers for
-    top_game_covers = [0, 2, 3, 4, 5, 8, 9, 10, 13, 14, 18, 19, 22, 
-                       23, 27, 28, 33, 37, 39, 41, 46, 47, 49, 54]
+    top_game_covers_1 = [0, 2, 3, 4, 5, 8, 9, 10, 13, 14, 18, 19, 22, 
+                         23, 27, 28, 33, 37, 39, 41, 46, 47, 49, 54]
+    top_game_covers_2 = [60, 61, 64, 69, 73, 77, 78, 84, 90, 92, 94, 95, 
+                         96, 97, 98, 102, 103, 104, 109, 115, 117, 122, 126, 150]
     # Filter the games based on the predefined indices
-    top_games = [game['images'] for i, game in enumerate(top_games) if i in top_game_covers]
-    return top_games
+    top_games_1 = [game['images'] for i, game in enumerate(top_games) if i in top_game_covers_1]
+    top_games_2 = [game['images'] for i, game in enumerate(top_games) if i in top_game_covers_2]
+    return top_games_1, top_games_2
 
 
 # Function to count games and reviews by genre
@@ -124,13 +127,14 @@ def get_example_review(sentiment):
 # Function to generate blog post texts using OpenAI's API
 def summarize_reviews(games):
     completion = client.chat.completions.create(
-        model="gpt-4o-mini",
+        model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": "You are a professional video game blog writer."},
             {
                 "role": "user",
                 "content": f"""Generate two separate blog post texts (##BLOG1##, ##BLOG2##), 
-                each close to but not more than 100 words.
+                each close to but not more than 100 words. Make sure, that the following 
+                games are mentioned in every text only once:
                 - {games[0]}
                 - {games[1]}
                 - {games[2]}
@@ -141,6 +145,7 @@ def summarize_reviews(games):
             }
         ]
     )
+    # print(completion.choices[0])
     # Parse the API response into two separate blog posts
     blogs = completion.choices[0].message.content.split("##BLOG2##")
     blog1 = blogs[0].replace("##BLOG1##", "").strip()

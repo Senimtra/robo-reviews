@@ -65,8 +65,8 @@ body {
 }
 
 .body-card:hover {
-    transform: translateY(-5px);
-    transition: all 0.3s ease;
+    /* transform: translateY(-5px);
+    transition: all 0.3s ease; */
 }
 
 /* Button styles */
@@ -139,7 +139,7 @@ footer {
 
 .summary-content {
     margin-left: 1em;
-    height: 14.3em;
+    /* height: 14.3em; */
 }
 
 .summary-btn {
@@ -207,7 +207,8 @@ footer {
     padding-top: 3em;
     text-align: center;
     font-size: 115%;
-    color: #e1e1ff;
+    font-weight: bold;
+    color: #d9b7ff;
     /* color:purple; */
     opacity: 1;
 }
@@ -240,3 +241,14 @@ footer {
 .sentiment-metrics.matrix img {
     border-radius: 0.3em;
 }
+
+.cluster2,
+.cluster3,
+.cluster4 {
+    margin-top: 1.1em;
+}
+
+.cluster-topic b {
+    color: lightblue;
+}
+  
