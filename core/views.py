@@ -80,9 +80,11 @@ def index(request):
     # Prepare context data to send to the template
     context = {
         'game_sections': game_sections,
-        'top_games_image_list_0': top_games_image_list[0],  # List of images for the top games
-        'top_games_image_list_1': top_games_image_list[1],  # List of images for the top games
-        'sentiment_placeholder': sentiment_placeholder
+        # List of images for cover sections
+        'top_games_image_list_0': top_games_image_list[0],
+        'top_games_image_list_1': top_games_image_list[1],
+        'top_games_image_list_2': top_games_image_list[2],
+        'sentiment_placeholder': sentiment_placeholder,
     }
     
     # Render the 'index.html' template with the provided context

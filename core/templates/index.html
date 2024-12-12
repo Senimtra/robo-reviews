@@ -28,13 +28,13 @@
                         <a class="nav-link" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#reviews">Sentiment</a>
+                        <a class="nav-link" href="#sentiment-section">Sentiment</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#games">Clustering</a>
+                        <a class="nav-link" href="#clustering-section">Clustering</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#models">Summarization</a>
+                        <a class="nav-link" href="#summarization-section">Summarization</a>
                     </li>
                 </ul>
             </div>
@@ -45,9 +45,9 @@
         <!-- Header Image -->
         <img src="{% static 'images/robo_reviews_header.png' %}" alt="Gaming AI Robot" class="header-image" />
 
-        <h1 class="header-title" id="reviews">BERT-Based Sentiment Binning</h1>
+        <h1 class="header-title" id="sentiment-section">BERT-Based Sentiment Binning</h1>
 
-        <!-- Top Games Section -->
+        <!-- Top Games Cover Section 1 -->
         <div class="top-games">
             <div class="row">
                 {% for image in top_games_image_list_0 %}
@@ -102,7 +102,7 @@
 
         <!-- Sentiment Analysis Section -->
         <div class="body-card">
-            <h2 class="mb-4">Sentiment Analysis Results</h2>
+            <h2 class="mb-4">Sentiment Analysis: Implementation</h2>
             <p><b>GOAL: </b> Classify reviews into <span class="text-success"><b>positive</b></span>, <span
                     class="text-warning"><b>neutral</b></span>, and <span class="text-danger"><b>negative</b></span>
                 sentiments.<br>
@@ -140,9 +140,9 @@
             </div>
         </div>
 
-        <h1 class="header-title" id="games">Clustering Game Genres: Chaos to Clarity</h1>
+        <h1 class="header-title" id="clustering-section">Clustering Game Genres: Chaos to Clarity</h1>
 
-        <!-- Top Games Section -->
+        <!-- Top Games Cover Section 2 -->
         <div class="top-games">
             <div class="row">
                 {% for image in top_games_image_list_1 %}
@@ -209,28 +209,58 @@
             {% endfor %}
         </div>
 
-        <!-- Models Section -->
-        <h1 class="header-title" id="models">Models and clustering techniques...</h1>
+        <!-- Clustering & Summarization Section -->
+        <h1 class="header-title" id="summarization-section">Clustering & Summarization Techniques</h1>
+
+        <!-- Top Games Cover Section 3 -->
+        <div class="top-games">
+            <div class="row">
+                {% for image in top_games_image_list_2 %}
+                <div class="col-1 p-1">
+                    <div><img src="{{ image }}" class="card-img" /></div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
 
         <!-- Clustering Section -->
         <div class="body-card">
-            <h3 class="card-title">Clustering</h3>
-            <p class="card-title"><b>Clustering</b></p>
-            TOPIC MODELING
+            <h2 class="mb-4">Topic Modeling: Implementation</h2>
+            <p><b>GOAL: </b> Reduce <b><em>23 game genres</em></b> into main clusters for analysis and
+                categorization.<br>
+                <b>CHALLENGE: </b> Reducing genres to <em><b>distinct & meaningful clusters</b></em> while
+                <u>preserving interpretability</u>.
+            </p>
+            <h4>Latent Dirichlet allocation (LDA)</h4>
+            <ul>
+                <li><strong>Stopwords List:</strong> Fine-tuned to exclude irrelevant words and improve the
+                    clarity of clusters.</li>
+                <li><strong>Lemmatization:</strong> Standardized words to their base forms for consistent
+                    representation.</li>
+                <li><strong>Bag of Words:</strong> Converted text data into numerical vectors to feed into
+                    the model.</li>
+                <li><strong>Key Insights and Fine-tuning:</strong>
+                    <ul>
+                        <li>Stopword list optimization was critical for achieving meaningful clusters.</li>
+                        <li>Visualizations played a significant role in interpreting and refining the clusters.</li>
+                    </ul>
+                </li>
+            </ul>
+
             <div class="container my-4">
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="card-title">Topic 1</div>
                         <div class="card">
-                            <div class="card-body">
+                            <div class="card-body topic-visualization">
+                                <div class="btn btn-sm disabled">Topic 1</div>
                                 <img src="{% static 'images/topic_1.png' %}" width="100%" />
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="card-title">Topic 2</div>
                         <div class="card">
-                            <div class="card-body">
+                            <div class="card-body topic-visualization">
+                                <div class="btn btn-sm disabled">Topic 2</div>
                                 <img src="{% static 'images/topic_2.png' %}" width="100%" />
                             </div>
                         </div>
@@ -238,82 +268,67 @@
                 </div>
                 <div class="row mt-3">
                     <div class="col-md-6">
-                        <div class="card-title">Topic 3</div>
                         <div class="card">
-                            <div class="card-body">
+                            <div class="card-body topic-visualization">
+                                <div class="btn btn-sm disabled">Topic 3</div>
                                 <img src="{% static 'images/topic_3.png' %}" width="100%" />
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="card-title">Topic 4</div>
                         <div class="card">
-                            <div class="card-body">
+                            <div class="card-body topic-visualization">
+                                <div class="btn btn-sm disabled">Topic 4</div>
                                 <img src="{% static 'images/topic_4.png' %}" width="100%" />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <p class="card-text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Qui, repellendus ipsa quam quibusdam quas, eaque eos ipsum
-                dolorum eum, perspiciatis modi! Repellat quos pariatur non
-                perspiciatis consequuntur, esse temporibus! Tempora.
-            </p>
-        </div>
-
-
-        <div>Clustering Game Genres: Overview of Approach
-            Objective:
-
-            Reduce 23 game genres into 4 main clusters for analysis and categorization.
-            Preprocessing Steps:
-
-            Stopwords List:
-
-            Fine-tuned to exclude irrelevant words and improve the clarity of clusters.
-            Key tool for optimizing the final outcomes.
-            Lemmatization:
-
-            Standardized words to their base forms for consistent representation.
-            Bag of Words:
-
-            Converted text data into numerical vectors to feed into the model.
-            Clustering Methodology:
-
-            Used Latent Dirichlet Allocation (LDA) via Scikit-learn to identify clusters.
-            Visualization Techniques:
-
-            Wordclouds:
-            Helped in understanding the dominant themes of each cluster.
-            t-SNE:
-            Provided a low-dimensional representation of clusters.
-            pyLDAvis:
-            Offered interactive exploration of cluster-topic relationships.
-            Key Insights and Fine-tuning:
-
-            Stopword list optimization was critical for achieving meaningful clusters.
-            Visualizations played a significant role in interpreting and refining the clusters.
+            <div class="container my-4">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body topic-visualization">
+                                <div class="btn btn-sm disabled">t-SNE</div>
+                                <img src="{% static 'images/clustering_1.png' %}" width="100%" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body topic-visualization">
+                                <div class="btn btn-sm disabled">pyLDAvis</div>
+                                <img src="{% static 'images/clustering_2.png' %}" width="100%" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Summarizing Section -->
         <div class="body-card">
-            <h3 class="card-title">Summarizing</h3>
-            <p class="card-title"><b>Summarizing</b></p>
-            <p></p>
-            <p class="card-text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Qui, repellendus ipsa quam quibusdam quas, eaque eos ipsum
-                dolorum eum, perspiciatis modi! Repellat quos pariatur non
-                perspiciatis consequuntur, esse temporibus! Tempora.
+            <h2 class="mb-4">Text Summarization: Implementation</h2>
+            <p><b>GOAL: </b> Summarizing the top 3 games per cluster into pros and cons.<br>
+                <b>CHALLENGE: </b> Ensuring the summarization processes every game consistently.
             </p>
+            <h4>OpenAI API Integration</h4>
+            <ul>
+                <li><strong>Model Selection:</strong> Focused on improving inference speed.</li>
+                <li><strong>Token Optimization:</strong> Reduced costs and ensured prompt efficiency.</li>
+                <li><strong>Deployment Optimization</strong>
+                    <ul>
+                        <li>HTML Generation: Ensured seamless integration with proper code.</li>
+                        <li>Async Handling & Lazy Loading: Improving response times.</li>
+                    </ul>
+                </li>
+            </ul>
         </div>
 
         <!-- Footer -->
-        <footer>&copy; 2024 Game Reviews Hub. All rights reserved.</footer>
+        <footer>&copy; 2024 Game Reviews - AI Bootcamp Project</footer>
     </div>
-
 
     <!-- External Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

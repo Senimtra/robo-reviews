@@ -14,16 +14,19 @@ client = openai.OpenAI()
 # Function to fetch images of top-rated games
 def top_games_images():
     # Annotate games with their average rating, order by rating in descending order, and fetch the top 55
-    top_games = Game.objects.annotate(avg_rating=Avg('review__rating')).order_by('-avg_rating').values('images')[:151]
+    top_games = Game.objects.annotate(avg_rating=Avg('review__rating')).order_by('-avg_rating').values('images')[:350]
     # Specific indices of games to select covers for
     top_game_covers_1 = [0, 2, 3, 4, 5, 8, 9, 10, 13, 14, 18, 19, 22, 
                          23, 27, 28, 33, 37, 39, 41, 46, 47, 49, 54]
     top_game_covers_2 = [60, 61, 64, 69, 73, 77, 78, 84, 90, 92, 94, 95, 
                          96, 97, 98, 102, 103, 104, 109, 115, 117, 122, 126, 150]
+    top_game_covers_3 = [151, 152, 161, 163, 175, 176, 181, 183, 189, 205, 207, 261,
+                         265, 268, 271, 273, 274, 275, 290, 298, 301, 315, 333, 345]
     # Filter the games based on the predefined indices
     top_games_1 = [game['images'] for i, game in enumerate(top_games) if i in top_game_covers_1]
     top_games_2 = [game['images'] for i, game in enumerate(top_games) if i in top_game_covers_2]
-    return top_games_1, top_games_2
+    top_games_3 = [game['images'] for i, game in enumerate(top_games) if i in top_game_covers_3]
+    return top_games_1, top_games_2, top_games_3
 
 
 # Function to count games and reviews by genre
