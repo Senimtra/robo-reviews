@@ -160,7 +160,7 @@ function collapseTopPicks() {
     });
 }
 
-// Function to get top combat games summarization
+// Function to get top games summarization
 const getSummarization = (i) => {
     // Send the POST request
     fetch("/summarization/", {
@@ -179,6 +179,7 @@ const getSummarization = (i) => {
         });
 };
 
+// Call function for every topic
 for (i = 0; i < 4; i++) {
     getSummarization(i);
 }

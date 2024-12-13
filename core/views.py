@@ -9,7 +9,6 @@ from .models import Review
 import requests
 import json
 
-
 # Fetch top combat game picks
 top_combat_game_picks = top_combat_picks()
 # Fetch top simulation game picks
@@ -18,7 +17,6 @@ top_sim_game_picks = top_sim_picks()
 top_tact_game_picks = top_tact_picks()
 # Fetch top open worlds and discovery games
 top_disco_game_picks = top_disco_picks()
-
 
 # Extract the titles of the top games for summarization
 summ_combat = [game[0] for game in top_combat_game_picks]
@@ -36,7 +34,7 @@ def index(request):
     top_pick_games = [top_combat_game_picks, top_sim_game_picks, 
                       top_tact_game_picks, top_disco_game_picks]
 
-    # # Fetch the list of images for the top-rated games
+    # Fetch the list of images for the top-rated games
     top_games_image_list = top_games_images()
     # Fetch game and review counts categorized by genre
     genre_ratings_games = count_ratings_games()
@@ -71,12 +69,10 @@ def index(request):
     sentiment_placeholder = """<p><span style="background-color: rgb(0, 100, 0);">&nbsp;&nbsp;stellar&nbsp;&nbsp;</span> <span style="background-color: rgb(0, 76, 0);">&nbsp;&nbsp;gameplay&nbsp;&nbsp;</span> <span style="background-color: rgb(0, 100, 0);">&nbsp;&nbsp;and&nbsp;&nbsp;</span> <span style="background-color: rgb(0, 100, 0);">&nbsp;&nbsp;capt&nbsp;&nbsp;</span> <span style="background-color: rgb(0, 100, 0);">&nbsp;&nbsp;##ivating&nbsp;&nbsp;</span> <span style="background-color: rgb(0, 100, 0);">&nbsp;&nbsp;story&nbsp;&nbsp;</span> <span style="background-color: rgb(0, 100, 0);">&nbsp;&nbsp;make&nbsp;&nbsp;</span> <span style="background-color: rgb(0, 100, 0);">&nbsp;&nbsp;&nbsp;&nbsp;</span> <span style="background-color: rgb(0, 94, 0);">&nbsp;&nbsp;celestial&nbsp;&nbsp;</span> <span style="background-color: rgb(0, 100, 0);">&nbsp;&nbsp;odyssey&nbsp;&nbsp;</span> <span style="background-color: rgb(0, 100, 0);">&nbsp;&nbsp;&nbsp;&nbsp;</span> <span style="background-color: rgb(0, 100, 0);">&nbsp;&nbsp;a&nbsp;&nbsp;</span> <span style="background-color: rgb(0, 100, 0);">&nbsp;&nbsp;must&nbsp;&nbsp;</span> <span style="background-color: rgb(0, 80, 0);">&nbsp;&nbsp;-&nbsp;&nbsp;</span> <span style="background-color: rgb(0, 100, 0);">&nbsp;&nbsp;play&nbsp;&nbsp;</span> <span style="background-color: rgb(0, 100, 0);">&nbsp;&nbsp;!&nbsp;&nbsp;</span> <span style="background-color: rgb(0, 100, 0);">&nbsp;&nbsp;engaging&nbsp;&nbsp;</span> <span style="background-color: rgb(0, 72, 0);">&nbsp;&nbsp;mechanics&nbsp;&nbsp;</span> <span style="background-color: rgb(0, 100, 0);">&nbsp;&nbsp;and&nbsp;&nbsp;</span> <span style="background-color: rgb(0, 100, 0);">&nbsp;&nbsp;stunning&nbsp;&nbsp;</span> <span style="background-color: rgb(0, 100, 0);">&nbsp;&nbsp;visuals&nbsp;&nbsp;</span> <span style="background-color: rgb(0, 100, 0);">&nbsp;&nbsp;keep&nbsp;&nbsp;</span> <span style="background-color: rgb(0, 100, 0);">&nbsp;&nbsp;you&nbsp;&nbsp;</span> <span style="background-color: rgb(0, 100, 0);">&nbsp;&nbsp;hooked&nbsp;&nbsp;</span> <span style="background-color: rgb(0, 100, 0);">&nbsp;&nbsp;from&nbsp;&nbsp;</span> <span style="background-color: rgb(0, 100, 0);">&nbsp;&nbsp;start&nbsp;&nbsp;</span> <span style="background-color: rgb(0, 100, 0);">&nbsp;&nbsp;to&nbsp;&nbsp;</span> <span style="background-color: rgb(0, 100, 0);">&nbsp;&nbsp;finish&nbsp;&nbsp;</span> <span style="background-color: rgb(0, 100, 0);">&nbsp;&nbsp;.&nbsp;&nbsp;</span> <span style="background-color: rgb(0, 84, 0);">&nbsp;&nbsp;a&nbsp;&nbsp;</span> <span style="background-color: rgb(0, 100, 0);">&nbsp;&nbsp;true&nbsp;&nbsp;</span> <span style="background-color: rgb(0, 100, 0);">&nbsp;&nbsp;gem&nbsp;&nbsp;</span> <span style="background-color: rgb(0, 40, 0);">&nbsp;&nbsp;in&nbsp;&nbsp;</span> <span style="background-color: rgb(0, 67, 0);">&nbsp;&nbsp;gaming&nbsp;&nbsp;</span> <span style="background-color: rgb(0, 100, 0);">&nbsp;&nbsp;!&nbsp;&nbsp;</span></p>"""
     section_count = [1, 2, 3, 4]
 
-    # summarized_text = [summarized_combat, summarized_sim, summarized_tact, summarized_disco]
-    
     # Set up game cluster section list
     game_sections = zip(section_list, section_descr, section_count, section_descr_long, 
-                        genre_ratings_games, top_pick_games)  #, summarized_text)
-    
+                        genre_ratings_games, top_pick_games)
+
     # Prepare context data to send to the template
     context = {
         'game_sections': game_sections,
@@ -120,7 +116,7 @@ def review(request):
     if request.method == 'POST':
         data = json.loads(request.body)
         sentiment = data.get('sentiment', '')
-        # Request review from api
+        # Request review from API
         review = get_example_review(sentiment).strip('"')
         context = {'review': review}
     return JsonResponse(context)

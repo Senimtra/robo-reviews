@@ -13,7 +13,7 @@ client = openai.OpenAI()
 
 # Function to fetch images of top-rated games
 def top_games_images():
-    # Annotate games with their average rating, order by rating in descending order, and fetch the top 55
+    # Annotate games with their average rating, order by rating in descending order, and fetch the top 350
     top_games = Game.objects.annotate(avg_rating=Avg('review__rating')).order_by('-avg_rating').values('images')[:350]
     # Specific indices of games to select covers for
     top_game_covers_1 = [0, 2, 3, 4, 5, 8, 9, 10, 13, 14, 18, 19, 22, 
@@ -57,8 +57,9 @@ def top_combat_picks():
             .order_by('-average_rating')[:30]
             .values('title', 'average_rating', 'images', 'price', 'parent_asin', 'short_description')  # Include fields
     )
+    # Select specific top games by predefined indices
     top_games_list = [(game['title'], game['images'], game['price'], game['parent_asin'], game['average_rating'], 
-                       game['short_description']) for i, game in enumerate(top_games) if i in [1, 2, 3]]  # cover selection
+                       game['short_description']) for i, game in enumerate(top_games) if i in [1, 2, 3]]
     return top_games_list
 
 
@@ -73,9 +74,11 @@ def top_sim_picks():
             .order_by('-average_rating')[:30]
             .values('title', 'average_rating', 'images', 'price', 'parent_asin', 'short_description')  # Include fields
     )
+    # Select specific top games by predefined indices
     top_games_list = [(game['title'], game['images'], game['price'], game['parent_asin'], game['average_rating'], 
-                       game['short_description']) for i, game in enumerate(top_games) if i in [5, 6, 7]]  # cover selection
+                       game['short_description']) for i, game in enumerate(top_games) if i in [5, 6, 7]]
     return top_games_list
+
 
 # Function to get top-rated action and tactical strategy games
 def top_tact_picks():
@@ -88,9 +91,11 @@ def top_tact_picks():
             .order_by('-average_rating')[:30]
             .values('title', 'average_rating', 'images', 'price', 'parent_asin', 'short_description')  # Include fields
     )
+    # Select specific top games by predefined indices
     top_games_list = [(game['title'], game['images'], game['price'], game['parent_asin'], game['average_rating'], 
-                       game['short_description']) for i, game in enumerate(top_games) if i in [1, 6, 16]]  # cover selection
+                       game['short_description']) for i, game in enumerate(top_games) if i in [1, 6, 16]]
     return top_games_list
+
 
 # Function to get top-rated open worlds and discovery games
 def top_disco_picks():
@@ -103,8 +108,9 @@ def top_disco_picks():
             .order_by('-average_rating')[:30]
             .values('title', 'average_rating', 'images', 'price', 'parent_asin', 'short_description')  # Include fields
     )
+    # Select specific top games by predefined indices
     top_games_list = [(game['title'], game['images'], game['price'], game['parent_asin'], game['average_rating'], 
-                       game['short_description']) for i, game in enumerate(top_games) if i in [20, 24, 25]]  # cover selection
+                       game['short_description']) for i, game in enumerate(top_games) if i in [20, 24, 25]]
     return top_games_list
 
 
@@ -121,8 +127,8 @@ def get_example_review(sentiment):
                 "role": "user",
                 "content": (
                     f"Generate a short video game review. "
+                    f"Make very sure that its sentiment is clearly: {sentiment}."
                     f"It can be any length but not more than 30 words. "
-                    f"Make very sure that its sentiment is: {sentiment}."
                 )
             }
         ]
