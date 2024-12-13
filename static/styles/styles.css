@@ -75,7 +75,7 @@ body {
 
 /* Button styles */
 .btn-custom {
-    background-color: #6b52a7; /* Violet button color */
+    background-color: #6b52a7 !important; /* Violet button color */
     border: none;
     color: #fff;
     border-radius: 20px;
@@ -86,7 +86,7 @@ body {
 }
 
 .btn-custom:hover {
-    background-color: #8a6dd1; /* Hover effect for buttons */
+    background-color: #8a6dd1 !important; /* Hover effect for buttons */
 }
 
 .btn-group {
@@ -119,6 +119,14 @@ body {
     margin: 20px 0;
     padding: 10px 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.game-counts {
+    border: 1px solid grey;
+    border-radius: 0.2em;
+    padding: 0.3em 0.6em;
+    border-color: #6b52a7 !important; /* Violet button color */
+    background-color: #3b3b5e
 }
 
 /* Footer styles */
@@ -161,6 +169,19 @@ footer {
 
 .summary-box.expanded {
     height: 50em; /* Expanded state for summary */
+}
+
+.pro-text {
+    border: 1px solid green;
+    border-radius: 0.3em;
+    padding: 0.6em 0.8em;
+    background-color: rgba(0, 128, 0, 0.125);
+}
+.contra-text {
+    border: 1px solid red;
+    border-radius: 0.3em;
+    padding: 0.7em;
+    background-color: rgba(255, 0, 0, 0.125);
 }
 
 .expandable {

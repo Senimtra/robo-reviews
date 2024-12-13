@@ -17,7 +17,7 @@
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-sm">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">RoboReviews</a>
+            <a class="navbar-brand" href="#">🌟 RoboReviews</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -106,13 +106,15 @@
             <p><b>GOAL: </b> Classify reviews into <span class="text-success"><b>positive</b></span>, <span
                     class="text-warning"><b>neutral</b></span>, and <span class="text-danger"><b>negative</b></span>
                 sentiments.<br>
-                <b>CHALLENGE: </b> Dataset ratings (1–5) didn’t align with 3 labels and had a skewed distribution.
+                <b>CHALLENGE: </b> Dataset ratings (1–5) didn’t align with 3 labels and had a <em>skewed</em> distribution.
             </p>
             <h4 class="implementation">Training Process and Results</h4>
             <ul>
+                <li><strong>Methodology:</strong> Essentially performing <em><b>regression</b></em> (binned) for
+                    <em><b>a classification task.</b></em>
+                </li>
                 <li><strong>Model Approach:</strong> Trained <em><b>DistilBERT</b></em> to predict continuous sentiment
-                    scores
-                    (1–5).
+                    scores (0-1 => 0.33/0.66).
                 </li>
                 <li><strong>Post-Processing:</strong> Binned predictions into 3 sentiment categories (positive,
                     neutral,
@@ -170,13 +172,13 @@
                     <div class="summary-content d-flex flex-column justify-content-between" style="flex: 8">
                         <div class="cluster-topic">{{ section.3|safe }}</div>
                         <!-- Topic intro text -->
-                        <div class="d-flex justify-content-between">
-                            <div>Games: {{ section.4.0 }} 🎮</div>
+                        <div class="d-flex justify-content-between align-items-end">
+                            <div class="game-counts">Games: {{ section.4.0 }} 🎮</div>
                             <!-- Topic game count -->
-                            <div>Reviews: {{ section.4.1 }} ⭐</div>
+                            <div class="game-counts">Reviews: {{ section.4.1 }} ⭐</div>
                             <!-- Topic review count -->
                             <div>
-                                <a class="btn summary-btn accordion-button" data-bs-toggle="collapse"
+                                <a class="btn accordion-button btn-custom" data-bs-toggle="collapse"
                                     href="#collapseSummary{{ section.2 }}" role="button" aria-expanded="false"
                                     aria-controls="collapseSummary{{ section.2 }}" onclick="collapseTopPicks(this)">
                                     Top Picks
@@ -246,7 +248,26 @@
                     </ul>
                 </li>
             </ul>
-
+            <div class="container my-4">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body topic-visualization">
+                                <div class="btn btn-sm disabled">t-SNE</div>
+                                <img src="{% static 'images/clustering_1.png' %}" width="100%" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body topic-visualization">
+                                <div class="btn btn-sm disabled">pyLDAvis</div>
+                                <img src="{% static 'images/clustering_2.png' %}" width="100%" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="container my-4">
                 <div class="row">
                     <div class="col-md-6">
@@ -285,42 +306,23 @@
                     </div>
                 </div>
             </div>
-            <div class="container my-4">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-body topic-visualization">
-                                <div class="btn btn-sm disabled">t-SNE</div>
-                                <img src="{% static 'images/clustering_1.png' %}" width="100%" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-body topic-visualization">
-                                <div class="btn btn-sm disabled">pyLDAvis</div>
-                                <img src="{% static 'images/clustering_2.png' %}" width="100%" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <!-- Summarizing Section -->
         <div class="body-card" id="summarization-section">
             <h2 class="mb-4 implementation">Text Summarization: Implementation</h2>
-            <p><b>GOAL: </b> Summarizing the top 3 games per cluster into pros and cons.<br>
+            <p><b>GOAL: </b> Summarizing the <b><em>top 3 games per cluster</em></b> into <em><u>pros</u></em> and
+                <em><u>cons</u></em>.<br>
                 <b>CHALLENGE: </b> Ensuring the summarization processes every game consistently.
             </p>
             <h4 class="implementation">OpenAI API Integration</h4>
             <ul>
-                <li><strong>Model Selection:</strong> Focused on improving inference speed.</li>
-                <li><strong>Token Optimization:</strong> Reduced costs and ensured prompt efficiency.</li>
+                <li><strong>Model Selection:</strong> Focused on improving <em>inference speed</em>.</li>
+                <li><strong>Token Optimization:</strong> Reduced costs and ensured <em>prompt efficiency</em>.</li>
                 <li><strong>Deployment Optimization</strong>
                     <ul>
                         <li>HTML Generation: Ensured seamless integration with proper code.</li>
-                        <li>Async Handling & Lazy Loading: Improving response times.</li>
+                        <li>Async Handling & Lazy Loading: Improving <em>response times</em>.</li>
                     </ul>
                 </li>
             </ul>
@@ -347,7 +349,7 @@
         </div>
 
         <!-- Footer -->
-        <footer>&copy; 2024 Game Reviews - AI Bootcamp Project</footer>
+        <footer>&copy; 2025 Powered by ML & AI | Discovering the Game Within</footer>
     </div>
 
     <!-- External Scripts -->
