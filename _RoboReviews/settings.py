@@ -15,11 +15,13 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # MODEL
 MODEL_URL = os.environ.get('MODEL_URL')
 
+# FRONTEND (HOST)
+FRONTEND = os.environ.get('FRONTEND')
 
 # SECURITY
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [FRONTEND, '127.0.0.1']
 
 
 # Application definition

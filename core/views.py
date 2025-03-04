@@ -1,3 +1,4 @@
+from django.views.decorators.csrf import ensure_csrf_cookie
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.conf import settings
@@ -27,6 +28,8 @@ summ_disco = [game[0] for game in top_disco_game_picks]
 
 summ_titles = [summ_combat, summ_sim, summ_tact, summ_disco]
 
+
+@ensure_csrf_cookie
 
 # Main index view to display game-related information
 def index(request):
