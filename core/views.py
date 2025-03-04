@@ -1,5 +1,6 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
+from django.conf import settings
 
 # Import functions to handle business logic
 from .functions import top_games_images, count_ratings_games, top_combat_picks, top_sim_picks
@@ -92,7 +93,7 @@ def predict(request):
     if request.method == "POST":
         data = json.loads(request.body)
         review = data.get("review", "")
-        external_url = "http://127.0.0.1:5000/predict"
+        external_url = f"{settings.MODEL_URL}/predict"
         # POST request
         response = requests.post(
             external_url,
