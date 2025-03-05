@@ -126,9 +126,10 @@ def get_example_review(sentiment):
             {
                 "role": "user",
                 "content": (
-                    f"Generate a short video game review. "
-                    f"Make very sure that its sentiment is clearly: {sentiment}."
-                    f"It can be any length but not more than 30 words. "
+                    f"Write a short video game review that is absolutely and unmistakably {sentiment}. "
+                    f"The sentiment should be so clear that anyone reading it would have no doubt whether it is {sentiment}. "
+                    f"Avoid any ambiguity. "
+                    f"It can be any length but not more than 30 words."
                 )
             }
         ]
