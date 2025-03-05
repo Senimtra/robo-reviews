@@ -24,7 +24,7 @@ const csrftoken = getCookie("csrftoken");
 const getReview = (button) => {
     // Desired sentiment
     sentiment = button.innerText;
-
+    document.getElementById("review-input").innerText = "🤖 Generating review...";
     // Send the POST request
     fetch("/review/", {
         method: "POST",
@@ -45,6 +45,12 @@ const getReview = (button) => {
 const getPrediction = () => {
     // Get text from the input box
     const reviewText = document.getElementById("review-input").value;
+    const predictionSpinner = `<div id="prediction-spinner">
+  <div class="spinner-grow" style="color: #6b52a7; width: 1.7em; height: 1.7em;" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>`;
+    document.getElementById("attention-result").innerHTML = predictionSpinner;
 
     // Send the POST request
     fetch("/predict/", {
