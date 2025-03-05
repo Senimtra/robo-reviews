@@ -5,6 +5,8 @@ from . import views
 urlpatterns = [
     # Home view
     path('', views.index, name = 'index'),
+    # Wake-up served model
+    path('wake-up/', views.wakeup, name = 'wakeup'),
     # Get example reviews
     path('review/', views.review, name = 'review'),
     # Sentiment classification

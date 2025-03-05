@@ -133,3 +133,13 @@ def summarization(request):
         summarized_texts = summarize_reviews(summ_titles[topic])
         context = {'summarization': summarized_texts}
     return JsonResponse(context)
+
+
+# Wake-up served model
+def wakeup(request):
+    if request.method == 'GET':
+        try:
+            response = requests.get(settings.MODEL_URL)
+            return JsonResponse({"status": response.status_code})
+        except requests.RequestException:
+            return JsonResponse({"status": response.status_code})

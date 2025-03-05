@@ -365,6 +365,13 @@
 
     <!-- External Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        window.onload = () => {
+            fetch("/wake-up", { method: "GET" })
+                .then(() => { /* Successful wake-up */ })
+                .catch(() => { /* Silently handle the error */ });
+        };
+    </script>
 
 </body>
 
