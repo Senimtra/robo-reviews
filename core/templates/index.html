@@ -12,8 +12,6 @@
     <link href="{% static 'styles/styles.css' %}" rel="stylesheet" />
     <!-- Favicon for the website -->
     <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
-    <!-- Preload Header animation -->
-    <link rel="preload" as="video" href="{% static 'animations/robo_reviews_header.webm' %}" type="video/webm">
 </head>
 
 <script src="{% static 'js/scripts.js' %}"></script> <!-- Link to custom JavaScript file -->
@@ -56,8 +54,9 @@
 
         <div class="container">
             <!-- Header Animation -->
-            <video autoplay loop muted playsinline preload="auto" class="header-image">
+            <video preload="auto" autoplay loop muted class="header-image">
                 <source src="{% static 'animations/robo_reviews_header.webm' %}" type="video/webm">
+                Your browser does not support the video tag.
             </video>
 
             <!-- Project Introduction -->
