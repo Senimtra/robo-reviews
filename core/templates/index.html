@@ -12,6 +12,8 @@
     <link href="{% static 'styles/styles.css' %}" rel="stylesheet" />
     <!-- Favicon for the website -->
     <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <!-- Preload Header animation -->
+    <link rel="preload" as="video" href="{% static 'animations/robo_reviews_header.webm' %}" type="video/webm">
 </head>
 
 <script src="{% static 'js/scripts.js' %}"></script> <!-- Link to custom JavaScript file -->
@@ -49,12 +51,50 @@
 
     <div class="container">
         <!-- Header Animation -->
-        <video autoplay loop muted playsinline class="header-image">
+        <video autoplay loop muted playsinline preload="auto" class="header-image">
             <source src="{% static 'animations/robo_reviews_header.webm' %}" type="video/webm">
         </video>
 
-        <!-- Section Title -->
-        <h1 class="header-title" id="sentiment-section">BERT-Based Sentiment Binning</h1>
+        <!-- Project Introduction -->
+        <h1 class="header-title">🎮 Video Game Review Experiment 🔫</h1>
+
+        <!-- Introduction Section -->
+        <div class="body-card">
+            <div class="d-flex justify-content-between mb-2">
+                <div class="fs-3 intro-headings">👾 <b>Sentiment Analysis ⭐</b></div>
+                <div class="fs-6 intro-note"><em>… using ML</em></div>
+            </div>
+            <div>Classifies video game reviews as <span class="text-success">Positive</span>, <span
+                    class="text-warning">Neutral</span>, or <span class="text-danger">Negative</span> using
+                a <em><b>fine-tuned DistilBERT model</b></em>.
+                Trained on a curated dataset of game reviews, the model learns to detect sentiment with high accuracy.
+                Once trained, it is deployed via a <em>Flask API</em>, enabling <em>real-time sentiment analysis</em>
+                for generated reviews and user-submitted texts.</div>
+        </div>
+        <div class="body-card">
+            <div class="d-flex justify-content-between mb-2">
+                <div class="fs-3 intro-headings">👾 <b>Genre Clustering 💢</b></div>
+                <div class="fs-6 intro-note"><em>… using LDA</em></div>
+            </div>
+            <div>Groups 23 game genres into 4 broader categories to improve organization. Using <em><b>Latent Dirichlet
+                        Allocation</b></em>, the model identifies <em>underlying themes</em> in game genres,
+                enabling
+                better data visualization. This approach helps compare similar games, making it easier to explore
+                relationships between <em>different types of gameplay</em>.</div>
+        </div>
+        <div class="body-card">
+            <div class="d-flex justify-content-between mb-2">
+                <div class="fs-3 intro-headings">👾 <b>Review Summarization 📜</b></div>
+                <div class="fs-6 intro-note"><em>… using AI</em></div>
+            </div>
+            <div>
+                Selects the <em><b>top 3 games from each cluster</b></em> and creates <em>two blog-style posts</em>
+                using the <em><b>OpenAI Api</b></em>.
+                One post highlights their key strengths and appeal, while the other explores their drawbacks.
+                This provides a well-rounded view of what makes these games stand out - both positively and
+                negatively - based on player feedback.
+            </div>
+        </div>
 
         <!-- Display top games' cover images -->
         <div class="top-games">
@@ -66,6 +106,10 @@
                 {% endfor %}
             </div>
         </div>
+
+        <!-- Section Title -->
+        <h1 class="header-title" id="sentiment-section">👾 Review Sentiment Classification <span
+                class="fs-3">😊😐🤨</span></h1>
 
         <!-- Main content section -->
         <div class="container mt-4 py-3 review-box">
@@ -99,13 +143,16 @@
                 <div class="col-md-12 d-flex justify-content-between align-items-end">
                     <div class="btn-group mt-4 text-center" role="group" aria-label="Basic example">
                         <button type="button" class="btn btn-dark disabled">Random Review</button>
-                        <button type="button" class="btn btn-success" onclick="getReview(this)">Positive</button>
-                        <button type="button" class="btn btn-warning" onclick="getReview(this)">Neutral</button>
-                        <button type="button" class="btn btn-danger" onclick="getReview(this)">Negative</button>
+                        <button type="button" class="btn btn-success flash-positive"
+                            onclick="getReview(this)">Positive</button>
+                        <button type="button" class="btn btn-warning flash-neutral"
+                            onclick="getReview(this)">Neutral</button>
+                        <button type="button" class="btn btn-danger flash-negative"
+                            onclick="getReview(this)">Negative</button>
                     </div>
                     <div class="d-flex">
                         <button class="btn btn-dark disabled me-4" id="confidence">Confidence Level: 00.00%</button>
-                        <button class="btn btn-custom" onclick="getPrediction()">Get Prediction</button>
+                        <button class="btn btn-custom btn-pulse" onclick="getPrediction()">Get Prediction</button>
                     </div>
                 </div>
             </div>
@@ -125,7 +172,8 @@
                 <li><strong>Methodology:</strong> Essentially performing <em><b>regression</b></em> (binned) for
                     <em><b>a classification task.</b></em>
                 </li>
-                <li><strong>Model Approach:</strong> Trained <em><b>DistilBERT</b></em> to predict continuous sentiment
+                <li><strong>Model Approach:</strong> Trained <em><b>DistilBERT</b></em> to predict continuous
+                    sentiment
                     scores (0-1 => 0.33/0.66).
                 </li>
                 <li><strong>Post-Processing:</strong> Binned predictions into 3 sentiment categories (positive,
@@ -135,7 +183,8 @@
                     testing.</li>
                 <li><strong>Validation Accuracy (3 Bins):</strong> Improved to <b class="text-success">91%</b> on
                     generated reviews.</li>
-                <li class="mt-1"><strong>Confidence Level:</strong> Calculated using <em>Monte Carlo Sampling</em> with
+                <li class="mt-1"><strong>Confidence Level:</strong> Calculated using <em>Monte Carlo Sampling</em>
+                    with
                     10 iterations.</li>
                 </p>
                 <p></p>
@@ -155,8 +204,6 @@
             </div>
         </div>
 
-        <h1 class="header-title" id="clustering-section">Clustering Game Genres: Chaos to Clarity</h1>
-
         <!-- Top Games Cover Section 2 -->
         <div class="top-games">
             <div class="row">
@@ -167,6 +214,9 @@
                 {% endfor %}
             </div>
         </div>
+
+        <!-- Section Title -->
+        <h1 class="header-title" id="clustering-section">👾 Game Genres: Chaos to Clarity ✨</h1>
 
         <!-- Game Topic Cluster Section -->
         <div class="body-card mt-4">
@@ -188,12 +238,13 @@
                         <div class="cluster-topic">{{ section.3|safe }}</div>
                         <!-- Topic intro text -->
                         <div class="d-flex justify-content-between align-items-end">
+                            <div class="game-counts">Database 🗃️</div>
                             <div class="game-counts">Games: {{ section.4.0 }} 🎮</div>
                             <!-- Topic game count -->
                             <div class="game-counts">Reviews: {{ section.4.1 }} ⭐</div>
                             <!-- Topic review count -->
                             <div>
-                                <a class="btn accordion-button btn-custom" data-bs-toggle="collapse"
+                                <a class="btn accordion-button btn-custom btn-pulse" data-bs-toggle="collapse"
                                     href="#collapseSummary{{ section.2 }}" role="button" aria-expanded="false"
                                     aria-controls="collapseSummary{{ section.2 }}" onclick="collapseTopPicks(this)">
                                     Top Picks
@@ -220,14 +271,12 @@
                     <hr class="w-100" />
                     <div class="pro-text" id="summ-pro-{{ section.2 }}">Loading 'pro' summarization...</div>
                     <hr class="w-100" />
-                    <div class="contra-text" id="summ-contra-{{ section.2 }}">Loading 'contra' summarization...</div>
+                    <div class="contra-text" id="summ-contra-{{ section.2 }}">Loading 'contra' summarization...
+                    </div>
                 </div>
             </div>
             {% endfor %}
         </div>
-
-        <!-- Clustering & Summarization Section -->
-        <h1 class="header-title">Clustering & Summarization Techniques</h1>
 
         <!-- Top Games Cover Section 3 -->
         <div class="top-games">
@@ -239,6 +288,9 @@
                 {% endfor %}
             </div>
         </div>
+
+        <!-- Clustering & Summarization Section -->
+        <h1 class="header-title">👾 Clustering & Summarization Tech 🧩📜</h1>
 
         <!-- Clustering Section -->
         <div class="body-card">
