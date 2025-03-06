@@ -19,414 +19,434 @@
 <script src="{% static 'js/scripts.js' %}"></script> <!-- Link to custom JavaScript file -->
 
 <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-sm">
-        <div class="container-fluid">
-            <!-- Website branding/logo -->
-            <a class="navbar-brand" href="#">🌟 RoboReviews</a>
-            <!-- Toggler for responsive navbar -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <!-- Collapsible navbar content -->
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#sentiment-section">Sentiment</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#clustering-section">Clustering</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#summarization-section">Summarization</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
 
-    <div class="container">
-        <!-- Header Animation -->
-        <video autoplay loop muted playsinline preload="auto" class="header-image">
-            <source src="{% static 'animations/robo_reviews_header.webm' %}" type="video/webm">
-        </video>
+    <!-- Parallax Scroll -->
+    <div class="parallax"></div>
+    <div class="content">
 
-        <!-- Project Introduction -->
-        <h1 class="header-title">🎮 Video Game Review Experiment 🔫</h1>
-
-        <!-- Introduction Section -->
-        <div class="body-card">
-            <div class="d-flex justify-content-between mb-2">
-                <div class="fs-3 intro-headings">👾 <b>Sentiment Analysis ⭐</b></div>
-                <div class="fs-6 intro-note"><em>… using ML</em></div>
-            </div>
-            <div>Classifies video game reviews as <span class="text-success">Positive</span>, <span
-                    class="text-warning">Neutral</span>, or <span class="text-danger">Negative</span> using
-                a <em><b>fine-tuned DistilBERT model</b></em>.
-                Trained on a curated dataset of game reviews, the model learns to detect sentiment with high accuracy.
-                Once trained, it is deployed via a <em>Flask API</em>, enabling <em>real-time sentiment analysis</em>
-                for generated reviews and user-submitted texts.</div>
-        </div>
-        <div class="body-card">
-            <div class="d-flex justify-content-between mb-2">
-                <div class="fs-3 intro-headings">👾 <b>Genre Clustering 💢</b></div>
-                <div class="fs-6 intro-note"><em>… using LDA</em></div>
-            </div>
-            <div>Groups 23 game genres into 4 broader categories to improve organization. Using <em><b>Latent Dirichlet
-                        Allocation</b></em>, the model identifies <em>underlying themes</em> in game genres,
-                enabling
-                better data visualization. This approach helps compare similar games, making it easier to explore
-                relationships between <em>different types of gameplay</em>.</div>
-        </div>
-        <div class="body-card">
-            <div class="d-flex justify-content-between mb-2">
-                <div class="fs-3 intro-headings">👾 <b>Review Summarization 📜</b></div>
-                <div class="fs-6 intro-note"><em>… using AI</em></div>
-            </div>
-            <div>
-                Selects the <em><b>top 3 games from each cluster</b></em> and creates <em>two blog-style posts</em>
-                using the <em><b>OpenAI Api</b></em>.
-                One post highlights their key strengths and appeal, while the other explores their drawbacks.
-                This provides a well-rounded view of what makes these games stand out - both positively and
-                negatively - based on player feedback.
-            </div>
-        </div>
-
-        <!-- Display top games' cover images -->
-        <div class="top-games">
-            <div class="row">
-                {% for image in top_games_image_list_0 %}
-                <div class="col-1 p-1">
-                    <div><img src="{{ image }}" class="card-img" /></div>
+        <!-- Navigation Bar -->
+        <nav class="navbar navbar-expand-sm">
+            <div class="container-fluid">
+                <!-- Website branding/logo -->
+                <a class="navbar-brand" href="#">🌟 RoboReviews</a>
+                <!-- Toggler for responsive navbar -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!-- Collapsible navbar content -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#sentiment-section">Sentiment</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#clustering-section">Clustering</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#summarization-section">Summarization</a>
+                        </li>
+                    </ul>
                 </div>
-                {% endfor %}
             </div>
-        </div>
+        </nav>
 
-        <!-- Section Title -->
-        <h1 class="header-title" id="sentiment-section">👾 Review Sentiment Classification <span
-                class="fs-3">😊😐🤨</span></h1>
+        <div class="container">
+            <!-- Header Animation -->
+            <video autoplay loop muted playsinline preload="auto" class="header-image">
+                <source src="{% static 'animations/robo_reviews_header.webm' %}" type="video/webm">
+            </video>
 
-        <!-- Main content section -->
-        <div class="container mt-4 py-3 review-box">
-            <div class="row">
-                <!-- Game Review Text Input -->
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-body body-card-dark">
-                            <h5 class="card-title">Game Review Text</h5>
-                            <textarea id="review-input" class="form-control" rows="8"
-                                placeholder="Share your game review or let me generate a random one for you! ✍️"></textarea>
+            <!-- Project Introduction -->
+            <h1 class="header-title">🎮 Video Game Review Experiment 🔫</h1>
+
+            <!-- Introduction Section -->
+            <div class="body-card">
+                <div class="d-flex justify-content-between mb-2">
+                    <div class="fs-3 intro-headings">👾 <b>Sentiment Analysis ⭐</b></div>
+                    <div class="fs-6 intro-note"><em>… using ML</em></div>
+                </div>
+                <div>Classifies video game reviews as <span class="text-success">Positive</span>, <span
+                        class="text-warning">Neutral</span>, or <span class="text-danger">Negative</span> using
+                    a <em><b>fine-tuned DistilBERT model</b></em>.
+                    Trained on a curated dataset of game reviews, the model learns to detect sentiment with high
+                    accuracy.
+                    Once trained, it is deployed via a <em>Flask API</em>, enabling <em>real-time sentiment
+                        analysis</em>
+                    for generated reviews and user-submitted texts.</div>
+            </div>
+            <div class="body-card">
+                <div class="d-flex justify-content-between mb-2">
+                    <div class="fs-3 intro-headings">👾 <b>Genre Clustering 💢</b></div>
+                    <div class="fs-6 intro-note"><em>… using LDA</em></div>
+                </div>
+                <div>Groups 23 game genres into 4 broader categories to improve organization. Using <em><b>Latent
+                            Dirichlet
+                            Allocation</b></em>, the model identifies <em>underlying themes</em> in game genres,
+                    enabling
+                    better data visualization. This approach helps compare similar games, making it easier to explore
+                    relationships between <em>different types of gameplay</em>.</div>
+            </div>
+            <div class="body-card">
+                <div class="d-flex justify-content-between mb-2">
+                    <div class="fs-3 intro-headings">👾 <b>Review Summarization 📜</b></div>
+                    <div class="fs-6 intro-note"><em>… using AI</em></div>
+                </div>
+                <div>
+                    Selects the <em><b>top 3 games from each cluster</b></em> and creates <em>two blog-style posts</em>
+                    using the <em><b>OpenAI Api</b></em>.
+                    One post highlights their key strengths and appeal, while the other explores their drawbacks.
+                    This provides a well-rounded view of what makes these games stand out - both positively and
+                    negatively - based on player feedback.
+                </div>
+            </div>
+
+            <!-- Display top games' cover images -->
+            <div class="top-games">
+                <div class="row">
+                    {% for image in top_games_image_list_0 %}
+                    <div class="col-1 p-1">
+                        <div><img src="{{ image }}" class="card-img" /></div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Section Title -->
+            <h1 class="header-title" id="sentiment-section">👾 Review Sentiment Classification <span
+                    class="fs-3">😊😐🤨</span></h1>
+
+            <!-- Main content section -->
+            <div class="container mt-4 py-3 review-box">
+                <div class="row">
+                    <!-- Game Review Text Input -->
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body body-card-dark">
+                                <h5 class="card-title">Game Review Text</h5>
+                                <textarea id="review-input" class="form-control" rows="8"
+                                    placeholder="Share your game review or let me generate a random one for you! ✍️"></textarea>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Game Review Sentiment Results -->
-                <div class="col-md-6">
-                    <div class="card review-results">
-                        <div class="card-body">
-                            <h5 class="card-title">Prediction Results</h5>
-                            <p class="card-text review-results-form">
-                            <div id="attention-result" class="form-control review-results-text">
-                                {{ sentiment_placeholder|safe }}</div>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <!-- Buttons for random reviews and predictions -->
-                <div class="col-md-12 d-flex justify-content-between align-items-end">
-                    <div class="btn-group mt-4 text-center" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-dark disabled">Random Review</button>
-                        <button type="button" class="btn btn-success flash-positive"
-                            onclick="getReview(this)">Positive</button>
-                        <button type="button" class="btn btn-warning flash-neutral"
-                            onclick="getReview(this)">Neutral</button>
-                        <button type="button" class="btn btn-danger flash-negative"
-                            onclick="getReview(this)">Negative</button>
-                    </div>
-                    <div class="d-flex">
-                        <button class="btn btn-dark disabled me-4" id="confidence">Confidence Level: 00.00%</button>
-                        <button class="btn btn-custom btn-pulse" onclick="getPrediction()">Get Prediction</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Sentiment Analysis Section -->
-        <div class="body-card">
-            <h2 class="mb-4 implementation">Sentiment Analysis: Implementation</h2>
-            <p><b>GOAL: </b> Classify reviews into <span class="text-success"><b>positive</b></span>, <span
-                    class="text-warning"><b>neutral</b></span>, and <span class="text-danger"><b>negative</b></span>
-                sentiments.<br>
-                <b>CHALLENGE: </b> Dataset ratings (1–5) didn’t align with 3 labels and had a <em>skewed</em>
-                distribution.
-            </p>
-            <h4 class="implementation">Training Process and Results</h4>
-            <ul>
-                <li><strong>Methodology:</strong> Essentially performing <em><b>regression</b></em> (binned) for
-                    <em><b>a classification task.</b></em>
-                </li>
-                <li><strong>Model Approach:</strong> Trained <em><b>DistilBERT</b></em> to predict continuous
-                    sentiment
-                    scores (0-1 => 0.33/0.66).
-                </li>
-                <li><strong>Post-Processing:</strong> Binned predictions into 3 sentiment categories (positive,
-                    neutral,
-                    negative).</li>
-                <li class="mt-1"><strong>Training Accuracy (5 Bins):</strong> Achieved <b>83%</b> accuracy during
-                    testing.</li>
-                <li><strong>Validation Accuracy (3 Bins):</strong> Improved to <b class="text-success">91%</b> on
-                    generated reviews.</li>
-                <li class="mt-1"><strong>Confidence Level:</strong> Calculated using <em>Monte Carlo Sampling</em>
-                    with
-                    10 iterations.</li>
-                </p>
-                <p></p>
-                <p></p>
-            </ul>
-            <div class="container">
-                <div class="card-body d-flex">
-                    <!-- Display sentiment analysis metrics and visuals -->
-                    <div class="sentiment-metrics block">
-                        <img src="{% static 'images/sentiment_2.png' %}" class="img-fluid" />
-                        <img src="{% static 'images/sentiment_1.png' %}" class="img-fluid" />
-                    </div>
-                    <div class="sentiment-metrics matrix">
-                        <img src="{% static 'images/sentiment_3.png' %}" class="img-fluid" />
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Top Games Cover Section 2 -->
-        <div class="top-games">
-            <div class="row">
-                {% for image in top_games_image_list_1 %}
-                <div class="col-1 p-1">
-                    <div><img src="{{ image }}" class="card-img" /></div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-
-        <!-- Section Title -->
-        <h1 class="header-title" id="clustering-section">👾 Game Genres: Chaos to Clarity ✨</h1>
-
-        <!-- Game Topic Cluster Section -->
-        <div class="body-card mt-4">
-            {% for section in game_sections %}
-            <h3 class="card-title cluster{{ section.2 }}">Cluster {{ section.2 }} 💢 {{ section.0 }}</h3>
-            <!-- Topic title -->
-            <p class="card-text">{{ section.1|safe }}</p>
-            <!-- Topic description -->
-            <div class="container summary-box">
-                <div class="summary-head d-flex">
-                    <!-- Image Section -->
-                    <div class="card-body summary-image" style="flex: 2">
-                        <video autoplay loop muted playsinline class="cluster-image">
-                            <source src="{% static 'animations/games_topic_' %}{{ section.2 }}.webm" type="video/webm">
-                        </video>
-                    </div>
-                    <!-- Content Section -->
-                    <div class="summary-content d-flex flex-column justify-content-between" style="flex: 8">
-                        <div class="cluster-topic">{{ section.3|safe }}</div>
-                        <!-- Topic intro text -->
-                        <div class="d-flex justify-content-between align-items-end">
-                            <div class="game-counts">Database 🗃️</div>
-                            <div class="game-counts">Games: {{ section.4.0 }} 🎮</div>
-                            <!-- Topic game count -->
-                            <div class="game-counts">Reviews: {{ section.4.1 }} ⭐</div>
-                            <!-- Topic review count -->
-                            <div>
-                                <a class="btn accordion-button btn-custom btn-pulse" data-bs-toggle="collapse"
-                                    href="#collapseSummary{{ section.2 }}" role="button" aria-expanded="false"
-                                    aria-controls="collapseSummary{{ section.2 }}" onclick="collapseTopPicks(this)">
-                                    Top Picks
-                                </a>
+                    <!-- Game Review Sentiment Results -->
+                    <div class="col-md-6">
+                        <div class="card review-results">
+                            <div class="card-body">
+                                <h5 class="card-title">Prediction Results</h5>
+                                <p class="card-text review-results-form">
+                                <div id="attention-result" class="form-control review-results-text">
+                                    {{ sentiment_placeholder|safe }}</div>
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <!-- Buttons for random reviews and predictions -->
+                    <div class="col-md-12 d-flex justify-content-between align-items-end">
+                        <div class="btn-group mt-4 text-center" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-dark disabled">Random Review</button>
+                            <button type="button" class="btn btn-success flash-positive"
+                                onclick="getReview(this)">Positive</button>
+                            <button type="button" class="btn btn-warning flash-neutral"
+                                onclick="getReview(this)">Neutral</button>
+                            <button type="button" class="btn btn-danger flash-negative"
+                                onclick="getReview(this)">Negative</button>
+                        </div>
+                        <div class="d-flex">
+                            <button class="btn btn-dark disabled me-4" id="confidence">Confidence Level: 00.00%</button>
+                            <button class="btn btn-custom btn-pulse" onclick="getPrediction()">Get Prediction</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                <!-- Top Picks Collapse Section -->
-                <div class="collapse accordion-collapse" id="collapseSummary{{ section.2 }}">
-                    <hr class="w-100" />
-                    <div class="container mt-1">
-                        <div class="row d-flex justify-content-between">
-                            {% for images in section.5 %}
-                            <div class="col-md-4 d-flex">
-                                <div class="card p-3 flex-fill">
-                                    <img src="{{ images.1 }}" class="card-img-top" alt="Game Image" />
+            <!-- Sentiment Analysis Section -->
+            <div class="body-card">
+                <h2 class="mb-4 implementation">Sentiment Analysis: Implementation</h2>
+                <p><b>GOAL: </b> Classify reviews into <span class="text-success"><b>positive</b></span>, <span
+                        class="text-warning"><b>neutral</b></span>, and <span class="text-danger"><b>negative</b></span>
+                    sentiments.<br>
+                    <b>CHALLENGE: </b> Dataset ratings (1–5) didn’t align with 3 labels and had a <em>skewed</em>
+                    distribution.
+                </p>
+                <h4 class="implementation">Training Process and Results</h4>
+                <ul>
+                    <li><strong>Methodology:</strong> Essentially performing <em><b>regression</b></em> (binned) for
+                        <em><b>a classification task.</b></em>
+                    </li>
+                    <li><strong>Model Approach:</strong> Trained <em><b>DistilBERT</b></em> to predict continuous
+                        sentiment
+                        scores (0-1 => 0.33/0.66).
+                    </li>
+                    <li><strong>Post-Processing:</strong> Binned predictions into 3 sentiment categories (positive,
+                        neutral,
+                        negative).</li>
+                    <li class="mt-1"><strong>Training Accuracy (5 Bins):</strong> Achieved <b>83%</b> accuracy during
+                        testing.</li>
+                    <li><strong>Validation Accuracy (3 Bins):</strong> Improved to <b class="text-success">91%</b> on
+                        generated reviews.</li>
+                    <li class="mt-1"><strong>Confidence Level:</strong> Calculated using <em>Monte Carlo Sampling</em>
+                        with
+                        10 iterations.</li>
+                    </p>
+                    <p></p>
+                    <p></p>
+                </ul>
+                <div class="container">
+                    <div class="card-body d-flex">
+                        <!-- Display sentiment analysis metrics and visuals -->
+                        <div class="sentiment-metrics block">
+                            <img src="{% static 'images/sentiment_2.png' %}" class="img-fluid" />
+                            <img src="{% static 'images/sentiment_1.png' %}" class="img-fluid" />
+                        </div>
+                        <div class="sentiment-metrics matrix">
+                            <img src="{% static 'images/sentiment_3.png' %}" class="img-fluid" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Top Games Cover Section 2 -->
+            <div class="top-games">
+                <div class="row">
+                    {% for image in top_games_image_list_1 %}
+                    <div class="col-1 p-1">
+                        <div><img src="{{ image }}" class="card-img" /></div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Section Title -->
+            <h1 class="header-title" id="clustering-section">👾 Game Genres: Chaos to Clarity ✨</h1>
+
+            <!-- Game Topic Cluster Section -->
+            <div class="body-card mt-4">
+                {% for section in game_sections %}
+                <h3 class="card-title cluster{{ section.2 }}">Cluster {{ section.2 }} 💢 {{ section.0 }}</h3>
+                <!-- Topic title -->
+                <p class="card-text">{{ section.1|safe }}</p>
+                <!-- Topic description -->
+                <div class="container summary-box">
+                    <div class="summary-head d-flex">
+                        <!-- Image Section -->
+                        <div class="card-body summary-image" style="flex: 2">
+                            <video autoplay loop muted playsinline class="cluster-image">
+                                <source src="{% static 'animations/games_topic_' %}{{ section.2 }}.webm"
+                                    type="video/webm">
+                            </video>
+                        </div>
+                        <!-- Content Section -->
+                        <div class="summary-content d-flex flex-column justify-content-between" style="flex: 8">
+                            <div class="cluster-topic">{{ section.3|safe }}</div>
+                            <!-- Topic intro text -->
+                            <div class="d-flex justify-content-between align-items-end">
+                                <div class="game-counts">Database 🗃️</div>
+                                <div class="game-counts">Games: {{ section.4.0 }} 🎮</div>
+                                <!-- Topic game count -->
+                                <div class="game-counts">Reviews: {{ section.4.1 }} ⭐</div>
+                                <!-- Topic review count -->
+                                <div>
+                                    <a class="btn accordion-button btn-custom btn-pulse" data-bs-toggle="collapse"
+                                        href="#collapseSummary{{ section.2 }}" role="button" aria-expanded="false"
+                                        aria-controls="collapseSummary{{ section.2 }}" onclick="collapseTopPicks(this)">
+                                        Top Picks
+                                    </a>
                                 </div>
                             </div>
-                            {% endfor %}
                         </div>
                     </div>
-                    <hr class="w-100" />
-                    <div class="pro-text" id="summ-pro-{{ section.2 }}">Loading 'pro' summarization...</div>
-                    <hr class="w-100" />
-                    <div class="contra-text" id="summ-contra-{{ section.2 }}">Loading 'contra' summarization...
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
 
-        <!-- Top Games Cover Section 3 -->
-        <div class="top-games">
-            <div class="row">
-                {% for image in top_games_image_list_2 %}
-                <div class="col-1 p-1">
-                    <div><img src="{{ image }}" class="card-img" /></div>
+                    <!-- Top Picks Collapse Section -->
+                    <div class="collapse accordion-collapse" id="collapseSummary{{ section.2 }}">
+                        <hr class="w-100" />
+                        <div class="container mt-1">
+                            <div class="row d-flex justify-content-between">
+                                {% for images in section.5 %}
+                                <div class="col-md-4 d-flex">
+                                    <div class="card p-3 flex-fill">
+                                        <img src="{{ images.1 }}" class="card-img-top" alt="Game Image" />
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <hr class="w-100" />
+                        <div class="pro-text" id="summ-pro-{{ section.2 }}">Loading 'pro' summarization...</div>
+                        <hr class="w-100" />
+                        <div class="contra-text" id="summ-contra-{{ section.2 }}">Loading 'contra' summarization...
+                        </div>
+                    </div>
                 </div>
                 {% endfor %}
             </div>
-        </div>
 
-        <!-- Clustering & Summarization Section -->
-        <h1 class="header-title">👾 Clustering & Summarization Tech 🧩📜</h1>
-
-        <!-- Clustering Section -->
-        <div class="body-card">
-            <h2 class="mb-4 implementation">Topic Modeling: Implementation</h2>
-            <p><b>GOAL: </b> Reduce <b><em>23 game genres</em></b> into main clusters for analysis and
-                categorization.<br>
-                <b>CHALLENGE: </b> Reducing genres to <em><b>distinct & meaningful clusters</b></em> while
-                <u>preserving interpretability</u>.
-            </p>
-            <h4 class="implementation">Latent Dirichlet Allocation (LDA)</h4>
-            <ul>
-                <li><strong>Stopwords List:</strong> Fine-tuned to exclude irrelevant words and improve the
-                    clarity of clusters.</li>
-                <li><strong>Lemmatization:</strong> Standardized words to their base forms for consistent
-                    representation.</li>
-                <li><strong>Bag of Words:</strong> Converted text data into numerical vectors to feed into
-                    the model.</li>
-                <li><strong>Key Insights and Fine-tuning:</strong>
-                    <ul>
-                        <li>Stopword list optimization was critical for achieving meaningful clusters.</li>
-                        <li>Visualizations played a significant role in interpreting and refining the clusters.</li>
-                    </ul>
-                </li>
-            </ul>
-            <div class="container my-4">
+            <!-- Top Games Cover Section 3 -->
+            <div class="top-games">
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-body topic-visualization">
-                                <div class="btn btn-sm disabled">t-SNE</div>
-                                <img src="{% static 'images/clustering_1.png' %}" width="100%" />
+                    {% for image in top_games_image_list_2 %}
+                    <div class="col-1 p-1">
+                        <div><img src="{{ image }}" class="card-img" /></div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Clustering & Summarization Section -->
+            <h1 class="header-title">👾 Clustering & Summarization Tech 🧩📜</h1>
+
+            <!-- Clustering Section -->
+            <div class="body-card">
+                <h2 class="mb-4 implementation">Topic Modeling: Implementation</h2>
+                <p><b>GOAL: </b> Reduce <b><em>23 game genres</em></b> into main clusters for analysis and
+                    categorization.<br>
+                    <b>CHALLENGE: </b> Reducing genres to <em><b>distinct & meaningful clusters</b></em> while
+                    <u>preserving interpretability</u>.
+                </p>
+                <h4 class="implementation">Latent Dirichlet Allocation (LDA)</h4>
+                <ul>
+                    <li><strong>Stopwords List:</strong> Fine-tuned to exclude irrelevant words and improve the
+                        clarity of clusters.</li>
+                    <li><strong>Lemmatization:</strong> Standardized words to their base forms for consistent
+                        representation.</li>
+                    <li><strong>Bag of Words:</strong> Converted text data into numerical vectors to feed into
+                        the model.</li>
+                    <li><strong>Key Insights and Fine-tuning:</strong>
+                        <ul>
+                            <li>Stopword list optimization was critical for achieving meaningful clusters.</li>
+                            <li>Visualizations played a significant role in interpreting and refining the clusters.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="container my-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body topic-visualization">
+                                    <div class="btn btn-sm disabled">t-SNE</div>
+                                    <img src="{% static 'images/clustering_1.png' %}" width="100%" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body topic-visualization">
+                                    <div class="btn btn-sm disabled">pyLDAvis</div>
+                                    <img src="{% static 'images/clustering_2.png' %}" width="100%" />
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-body topic-visualization">
-                                <div class="btn btn-sm disabled">pyLDAvis</div>
-                                <img src="{% static 'images/clustering_2.png' %}" width="100%" />
+                </div>
+                <div class="container my-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body topic-visualization">
+                                    <div class="btn btn-sm disabled">Topic 1</div>
+                                    <img src="{% static 'images/topic_1.png' %}" width="100%" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body topic-visualization">
+                                    <div class="btn btn-sm disabled">Topic 2</div>
+                                    <img src="{% static 'images/topic_2.png' %}" width="100%" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body topic-visualization">
+                                    <div class="btn btn-sm disabled">Topic 3</div>
+                                    <img src="{% static 'images/topic_3.png' %}" width="100%" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body topic-visualization">
+                                    <div class="btn btn-sm disabled">Topic 4</div>
+                                    <img src="{% static 'images/topic_4.png' %}" width="100%" />
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="container my-4">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-body topic-visualization">
-                                <div class="btn btn-sm disabled">Topic 1</div>
-                                <img src="{% static 'images/topic_1.png' %}" width="100%" />
+
+            <!-- Summarizing Section -->
+            <div class="body-card" id="summarization-section">
+                <h2 class="mb-4 implementation">Text Summarization: Implementation</h2>
+                <p><b>GOAL: </b> Summarizing the <b><em>top 3 games per cluster</em></b> into <em><u>pros</u></em> and
+                    <em><u>cons</u></em>.<br>
+                    <b>CHALLENGE: </b> Ensuring the summarization processes every game consistently.
+                </p>
+                <h4 class="implementation">OpenAI API Integration</h4>
+                <ul>
+                    <li><strong>Model Selection:</strong> Focused on improving <em>inference speed</em>.</li>
+                    <li><strong>Token Optimization:</strong> Reduced costs and ensured <em>prompt efficiency</em>.</li>
+                    <li><strong>Deployment Optimization</strong>
+                        <ul>
+                            <li>HTML Generation: Ensured seamless integration with proper code.</li>
+                            <li>Async Handling & Lazy Loading: Improving <em>response times</em>.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="container my-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body topic-visualization">
+                                    <div class="btn btn-sm disabled">Summarization</div>
+                                    <img src="{% static 'images/api_summarization.png' %}" width="100%" />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-body topic-visualization">
-                                <div class="btn btn-sm disabled">Topic 2</div>
-                                <img src="{% static 'images/topic_2.png' %}" width="100%" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-body topic-visualization">
-                                <div class="btn btn-sm disabled">Topic 3</div>
-                                <img src="{% static 'images/topic_3.png' %}" width="100%" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-body topic-visualization">
-                                <div class="btn btn-sm disabled">Topic 4</div>
-                                <img src="{% static 'images/topic_4.png' %}" width="100%" />
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body topic-visualization">
+                                    <div class="btn btn-sm disabled">Random Review</div>
+                                    <img src="{% static 'images/api_reviews.png' %}" width="100%" />
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Summarizing Section -->
-        <div class="body-card" id="summarization-section">
-            <h2 class="mb-4 implementation">Text Summarization: Implementation</h2>
-            <p><b>GOAL: </b> Summarizing the <b><em>top 3 games per cluster</em></b> into <em><u>pros</u></em> and
-                <em><u>cons</u></em>.<br>
-                <b>CHALLENGE: </b> Ensuring the summarization processes every game consistently.
-            </p>
-            <h4 class="implementation">OpenAI API Integration</h4>
-            <ul>
-                <li><strong>Model Selection:</strong> Focused on improving <em>inference speed</em>.</li>
-                <li><strong>Token Optimization:</strong> Reduced costs and ensured <em>prompt efficiency</em>.</li>
-                <li><strong>Deployment Optimization</strong>
-                    <ul>
-                        <li>HTML Generation: Ensured seamless integration with proper code.</li>
-                        <li>Async Handling & Lazy Loading: Improving <em>response times</em>.</li>
-                    </ul>
-                </li>
-            </ul>
-            <div class="container my-4">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-body topic-visualization">
-                                <div class="btn btn-sm disabled">Summarization</div>
-                                <img src="{% static 'images/api_summarization.png' %}" width="100%" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-body topic-visualization">
-                                <div class="btn btn-sm disabled">Random Review</div>
-                                <img src="{% static 'images/api_reviews.png' %}" width="100%" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+            <!-- Footer -->
+            <footer>&copy; 2025 Powered by ML & AI | Discovering the Game Within | Crafted with 💜 by <a
+                    href="https://github.com/Senimtra" target="_blank">Me</a></footer>
 
-        <!-- Footer -->
-        <footer>&copy; 2025 Powered by ML & AI | Discovering the Game Within</footer>
+        </div>
     </div>
 
-    <!-- External Scripts -->
+    <!-- Bootstrap Script -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Wake-up Script -->
     <script>
         window.onload = () => {
             fetch("/wake-up", { method: "GET" })
                 .then(() => { /* Successful wake-up */ })
                 .catch(() => { /* Silently handle the error */ });
         };
+    </script>
+    <!-- Parallax Script -->
+    <script>
+        window.addEventListener("scroll", function () {
+            let scrolled = window.scrollY;
+            document.querySelector(".parallax").style.transform = `translateY(${scrolled * -0.3}px)`;
+        });
     </script>
 
 </body>

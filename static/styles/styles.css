@@ -1,8 +1,26 @@
 /* General Styles */
 body {
-    background-color: #1a1a2e; /* Dark violet background */
-    color: #ececec; /* Light text for contrast */
+    background-color: #1a1a2e;
+    color: #ececec;
     font-family: "Arial", sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: #d9b3ff;
+}
+
+/* Parallax Scrolling */
+.parallax {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 360vh;
+    background-image: url("/static/images/purple_background.png");
+    background-size: calc(100% / 3) auto; /* x-repeat 3 times */
+    background-repeat: repeat;
+    z-index: -1;
 }
 
 /* Navigation Bar Styles */
@@ -331,7 +349,7 @@ footer {
 }
 
 .spinner-grow {
-    animation: grow-animation 1.5s infinite; /* Correct shorthand usage */
+    animation: grow-animation 1.5s infinite;
 }
 
 @keyframes grow-animation {
