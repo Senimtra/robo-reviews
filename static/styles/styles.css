@@ -129,8 +129,9 @@ footer {
     overflow: hidden;
 }
 
-.summary-image img {
+.summary-image video {
     border-radius: 0.5em;
+    width: 100%;
 }
 
 .summary-content {

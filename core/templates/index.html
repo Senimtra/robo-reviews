@@ -48,8 +48,10 @@
     </nav>
 
     <div class="container">
-        <!-- Header Image -->
-        <img src="{% static 'images/robo_reviews_header.png' %}" alt="Gaming AI Robot" class="header-image" />
+        <!-- Header Animation -->
+        <video autoplay loop muted playsinline class="header-image">
+            <source src="{% static 'animations/robo_reviews_header.webm' %}" type="video/webm">
+        </video>
 
         <!-- Section Title -->
         <h1 class="header-title" id="sentiment-section">BERT-Based Sentiment Binning</h1>
@@ -177,7 +179,9 @@
                 <div class="summary-head d-flex">
                     <!-- Image Section -->
                     <div class="card-body summary-image" style="flex: 2">
-                        <img src="{% static 'images/games_topic_' %}{{ section.2 }}.png" width="100%" />
+                        <video autoplay loop muted playsinline class="cluster-image">
+                            <source src="{% static 'animations/games_topic_' %}{{ section.2 }}.webm" type="video/webm">
+                        </video>
                     </div>
                     <!-- Content Section -->
                     <div class="summary-content d-flex flex-column justify-content-between" style="flex: 8">
