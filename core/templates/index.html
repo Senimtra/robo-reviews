@@ -18,9 +18,12 @@
 
 <body>
 
+    <!-- Preloader -->
+    <div id="preloader">👾 <span class="ms-2"><em>Loading...</em></span></div>
+
     <!-- Parallax Scroll -->
     <div class="parallax"></div>
-    <div class="content">
+    <div id="content">
 
         <!-- Navigation Bar -->
         <nav class="navbar navbar-expand-sm">
@@ -54,7 +57,7 @@
 
         <div class="container">
             <!-- Header Animation -->
-            <video preload="auto" autoplay loop muted class="header-image">
+            <video preload="auto" autoplay loop muted id="header-image">
                 <source src="{% static 'animations/robo_reviews_header.webm' %}" type="video/webm">
                 Your browser does not support the video tag.
             </video>
@@ -432,6 +435,7 @@
 
     <!-- Bootstrap Script -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
     <!-- Wake-up Script -->
     <script>
         window.onload = () => {
@@ -440,6 +444,7 @@
                 .catch(() => { /* Silently handle the error */ });
         };
     </script>
+
     <!-- Parallax Script -->
     <script>
         window.addEventListener("scroll", function () {
@@ -447,6 +452,7 @@
             document.querySelector(".parallax").style.transform = `translateY(${scrolled * -0.15}px)`;
         });
     </script>
+
     <!-- Summarize cluster top picks -->
     <script>
         for (i = 0; i < 4; i++) {

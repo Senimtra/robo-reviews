@@ -20,11 +20,51 @@ const getCookie = (name) => {
 // Get the CSRF token
 const csrftoken = getCookie("csrftoken");
 
+// Pre-Loader Script
+document.addEventListener("DOMContentLoaded", function () {
+    const video = document.getElementById("header-image");
+    const preloader = document.getElementById("preloader");
+    const content = document.getElementById("content");
+    // Ensure background image is also loaded
+    const bgImage = new Image();
+    bgImage.src = "/static/images/purple_background.png";
+
+    let videoLoaded = false;
+    let bgLoaded = false;
+
+    function checkLoaded() {
+        if (videoLoaded && bgLoaded) {
+            preloader.style.display = "none";
+            content.style.display = "block";
+        }
+    }
+    // Check if video is cached and already loaded
+    if (video.readyState >= 4) {
+        videoLoaded = true;
+    } else {
+        video.oncanplaythrough = function () {
+            videoLoaded = true;
+            checkLoaded();
+        };
+    }
+    // Check if background image is cached and already loaded
+    if (bgImage.complete) {
+        bgLoaded = true;
+    } else {
+        bgImage.onload = function () {
+            bgLoaded = true;
+            checkLoaded();
+        };
+    }
+    checkLoaded(); // Ensure check is done on load
+});
+
 // Function to get example reviews
 const getReview = (button) => {
     // Desired sentiment
     sentiment = button.innerText;
-    document.getElementById("review-input").innerText = "🤖 Generating review...";
+    document.getElementById("review-input").innerText =
+        "🤖 Generating review...";
     // Send the POST request
     fetch("/review/", {
         method: "POST",
@@ -180,7 +220,9 @@ const getSummarization = (i) => {
         .then((response) => response.json())
         .then((result) => {
             const topic = i + 1;
-            document.querySelector(`#summ-pro-${topic}`).innerHTML = result.summarization[0];
-            document.querySelector(`#summ-contra-${topic}`).innerHTML = result.summarization[1];
+            document.querySelector(`#summ-pro-${topic}`).innerHTML =
+                result.summarization[0];
+            document.querySelector(`#summ-contra-${topic}`).innerHTML =
+                result.summarization[1];
         });
 };
