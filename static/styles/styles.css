@@ -16,7 +16,7 @@ a {
     top: 0;
     left: 0;
     width: 100%;
-    height: 360vh;
+    height: 280vh;
     background-image: url("/static/images/purple_background.png");
     background-size: calc(100% / 3) auto; /* x-repeat 3 times */
     background-repeat: repeat;
@@ -25,7 +25,7 @@ a {
 
 /* Navigation Bar Styles */
 .navbar {
-    background-color: #2d2d44;
+    background-color: #322d44;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -45,7 +45,12 @@ a {
 }
 
 .nav-link {
-    color: #ececec !important;
+    color: #ececec;
+    background-color: #252329;
+    border-radius: 0.4em;
+    margin-left: 0.7em;
+    padding: 0.3em 0.6em !important;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
 }
 
 .navbar-brand:hover,
@@ -58,7 +63,7 @@ a {
     max-width: 900px;
     margin: 20px auto;
     padding: 20px;
-    background-color: #2d2d44;
+    background-color: #322d44;
     border-radius: 15px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
 }
@@ -66,7 +71,8 @@ a {
 /* Header Styles */
 .header-image {
     width: 100%;
-    border-radius: 15px;
+    border-radius: 0.7em;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
 }
 
 .header-title {
@@ -83,7 +89,7 @@ a {
 
 /* Card Styles */
 .body-card {
-    background-color: #3b3b5e;
+    background-color: #423b5e;
     margin-bottom: 20px;
     border-radius: 10px;
     padding: 20px;
@@ -144,13 +150,13 @@ a {
 
 @keyframes flash-yellow {
     0% {
-        background-color: #ffc107;
+        background-color: #e3ac05;
     }
     50% {
         background-color: #9b8f29;
     }
     100% {
-        background-color: #ffc107;
+        background-color: #e3ac05;
     }
 }
 
@@ -167,7 +173,7 @@ a {
 }
 
 .flash-positive {
-    animation: flash-green 1.3s infinite alternate ease-in-out;
+    animation: flash-green 1.4s infinite alternate ease-in-out;
 }
 
 .flash-neutral {
@@ -175,13 +181,13 @@ a {
 }
 
 .flash-negative {
-    animation: flash-red 1.7s infinite alternate ease-in-out;
+    animation: flash-red 1.6s infinite alternate ease-in-out;
 }
 
 /* Top Games Section */
 .top-games {
     border-radius: 10px;
-    background-color: #3b3b5e;
+    background-color: #423b5e;
     margin: 20px 0;
     padding: 10px 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
@@ -191,6 +197,7 @@ a {
     object-fit: cover;
     height: 5em;
     border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
 }
 
 .game-counts {
@@ -219,6 +226,7 @@ footer {
 .summary-image video {
     border-radius: 0.5em;
     width: 100%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
 }
 
 .summary-content {
@@ -262,7 +270,7 @@ footer {
 /* Review Section */
 .review-box {
     border-radius: 10px;
-    background-color: #3b3b5e;
+    background-color: #423b5e;
     margin: 20px 0;
     padding: 10px 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);

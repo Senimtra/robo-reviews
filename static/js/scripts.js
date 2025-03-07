@@ -184,8 +184,3 @@ const getSummarization = (i) => {
             document.querySelector(`#summ-contra-${topic}`).innerHTML = result.summarization[1];
         });
 };
-
-// Call function for every topic
-for (i = 0; i < 4; i++) {
-    getSummarization(i);
-}

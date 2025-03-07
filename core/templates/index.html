@@ -33,10 +33,10 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <!-- Collapsible navbar content -->
-                <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="collapse navbar-collapse pe-2" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Home</a>
+                            <a class="nav-link" href="#"><b>Home</b></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#sentiment-section">Sentiment</a>
@@ -152,7 +152,7 @@
                             <button type="button" class="btn btn-dark disabled">Random Review</button>
                             <button type="button" class="btn btn-success flash-positive"
                                 onclick="getReview(this)">Positive</button>
-                            <button type="button" class="btn btn-warning flash-neutral"
+                            <button type="button" class="btn btn-warning text-white flash-neutral"
                                 onclick="getReview(this)">Neutral</button>
                             <button type="button" class="btn btn-danger flash-negative"
                                 onclick="getReview(this)">Negative</button>
@@ -444,8 +444,14 @@
     <script>
         window.addEventListener("scroll", function () {
             let scrolled = window.scrollY;
-            document.querySelector(".parallax").style.transform = `translateY(${scrolled * -0.3}px)`;
+            document.querySelector(".parallax").style.transform = `translateY(${scrolled * -0.15}px)`;
         });
+    </script>
+    <!-- Summarize cluster top picks -->
+    <script>
+        for (i = 0; i < 4; i++) {
+            getSummarization(i);
+        }
     </script>
 
 </body>
