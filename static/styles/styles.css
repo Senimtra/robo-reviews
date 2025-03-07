@@ -10,6 +10,12 @@ a {
     color: #d9b3ff;
 }
 
+/* Fonts */
+@font-face {
+    font-family: "Jersey10";
+    src: url("/static/fonts/Jersey10-Regular.ttf") format("truetype");
+}
+
 /* Full-screen preloader */
 #preloader {
     position: fixed;
@@ -21,9 +27,65 @@ a {
     justify-content: center;
     align-items: center;
     z-index: 9999;
-    font-size: 2em;
+    font-size: 3em;
+    font-family: "Jersey10", sans-serif;
     color: #d9b3ff;
     background-color: #322d44;
+}
+
+#preloader div {
+    font-size: 1.5em;
+    letter-spacing: 0;
+    display: flex;
+    align-items: center;
+}
+
+@keyframes dotBlink1 {
+    0%,
+    25% {
+        visibility: hidden;
+    }
+    26%,
+    100% {
+        visibility: visible;
+    }
+}
+
+@keyframes dotBlink2 {
+    0%,
+    50% {
+        visibility: hidden;
+    }
+    51%,
+    100% {
+        visibility: visible;
+    }
+}
+
+@keyframes dotBlink3 {
+    0%,
+    75% {
+        visibility: hidden;
+    }
+    76%,
+    100% {
+        visibility: visible;
+    }
+}
+
+#dot1 {
+    visibility: hidden;
+    animation: dotBlink1 1.5s infinite;
+}
+
+#dot2 {
+    visibility: hidden;
+    animation: dotBlink2 1.5s infinite;
+}
+
+#dot3 {
+    visibility: hidden;
+    animation: dotBlink3 1.5s infinite;
 }
 
 #content {
@@ -76,6 +138,10 @@ a {
 .navbar-brand:hover,
 .nav-link:hover {
     color: #d9b3ff !important;
+}
+
+.navbar-nav .nav-link:focus {
+    color: inherit;
 }
 
 /* Container Styles */
