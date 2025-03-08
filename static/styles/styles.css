@@ -90,7 +90,9 @@ a {
 }
 
 #content {
-    display: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-in-out;
 }
 
 /* Parallax Scrolling */

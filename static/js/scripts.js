@@ -35,7 +35,9 @@ document.addEventListener("DOMContentLoaded", function () {
     function checkLoaded() {
         if (videoLoaded && bgLoaded) {
             preloader.style.display = "none";
-            content.style.display = "block";
+            // Apply fade-in effect
+            content.style.visibility = "visible";
+            content.style.opacity = "1";
         }
     }
     // Check if video is cached and already loaded
