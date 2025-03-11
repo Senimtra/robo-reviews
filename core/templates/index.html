@@ -31,8 +31,6 @@
 
 </head>
 
-<script src="{% static 'js/scripts.js' %}"></script> <!-- Link to custom JavaScript file -->
-
 <body>
 
     <!-- Preloader -->
@@ -430,21 +428,55 @@
                 <div class="container my-4">
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-body topic-visualization">
-                                    <div class="btn btn-sm disabled">Summarization</div>
-                                    <img src="{% static 'images/api_summarization.png' %}" width="100%" />
+                            <a data-bs-toggle="modal" data-bs-target="#summarizationModal">
+                                <div class="card modal-card">
+                                    <div class="card-body topic-visualization">
+                                        <div class="btn btn-sm disabled">Summarization</div>
+                                        <img src="{% static 'images/api_summarization.png' %}" width="100%" />
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                         <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-body topic-visualization">
-                                    <div class="btn btn-sm disabled">Random Review</div>
-                                    <img src="{% static 'images/api_reviews.png' %}" width="100%" />
+                            <a data-bs-toggle="modal" data-bs-target="#reviewModal">
+                                <div class="card modal-card">
+                                    <div class="card-body topic-visualization">
+                                        <div class="btn btn-sm disabled">Random Review</div>
+                                        <img src="{% static 'images/api_reviews.png' %}" width="100%" />
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summarization modal -->
+            <div class="modal fade" id="summarizationModal" data-bs-backdrop="static" data-bs-keyboard="false"
+                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="card modal-content card-body modal-box">
+                        <div class="d-flex justify-content-between">
+                            <div class="btn btn-sm disabled">Summarization prompt for the two pros/cons posts</div>
+                            <button type="button" class="btn-close btn-close-light" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <img src="{% static 'images/api_summarization_modal.png' %}" width="100%" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review modal -->
+            <div class="modal fade" id="reviewModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="card modal-content card-body modal-box">
+                        <div class="d-flex justify-content-between">
+                            <div class="btn btn-sm disabled">Prompt to generate random and varied game reviews</div>
+                            <button type="button" class="btn-close btn-close-light" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <img src="{% static 'images/api_reviews_modal.png' %}" width="100%" />
                     </div>
                 </div>
             </div>
@@ -455,6 +487,8 @@
 
         </div>
     </div>
+
+    <script src="{% static 'js/scripts.js' %}"></script> <!-- Link to custom JavaScript file -->
 
     <!-- Bootstrap Script -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

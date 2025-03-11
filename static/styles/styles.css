@@ -475,3 +475,60 @@ footer {
         opacity: 1;
     }
 }
+
+/* Prompt Modal Styles */
+body.modal-open {
+    overflow-y: scroll !important;
+    padding-right: 0px !important;
+}
+
+a[data-bs-toggle="modal"] {
+    cursor: pointer;
+}
+
+.modal {
+    padding-right: 0 !important;
+}
+
+.modal-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.modal-card:hover {
+    transform: translateY(-2px) scale(1.015);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+
+.modal-dialog {
+    max-width: none;
+    width: 54rem !important;
+}
+
+.modal-content {
+    background-color: #211d2e !important;
+    padding: 1.5em;
+}
+
+.modal-box img {
+    border-radius: 0.25em;
+    margin-top: 0.5em;
+}
+
+.btn-close-light {
+    filter: brightness(0) saturate(100%) invert(39%) sepia(21%) saturate(527%)
+        hue-rotate(220deg) brightness(95%) contrast(96%);
+    opacity: 1;
+    transform: rotate(90deg);
+    transition: transform 0.2s ease-in-out;
+}
+
+.btn-close:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.btn-close:hover {
+    transform: rotate(-90deg);
+    transition: transform 0.2s ease-in-out;
+}
