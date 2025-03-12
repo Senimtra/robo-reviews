@@ -94,7 +94,8 @@
                 </div>
                 <div>Classifies video game reviews as <span class="text-success">Positive</span>, <span
                         class="text-warning">Neutral</span>, or <span class="text-danger">Negative</span> using
-                    a <em><b>fine-tuned DistilBERT model</b></em>.
+                    a <em><b>fine-tuned <a href="https://huggingface.co/docs/transformers/en/model_doc/distilbert"
+                                target="_blank">DistilBERT model</a></b></em>.
                     Trained on a curated dataset of game reviews, the model learns to detect sentiment with high
                     accuracy.
                     Once trained, it is deployed via a <em>Flask API</em>, enabling <em>real-time sentiment
@@ -106,9 +107,10 @@
                     <div class="fs-3 intro-headings">👾 <b>Genre Clustering 💢</b></div>
                     <div class="fs-6 intro-note"><em>… using LDA</em></div>
                 </div>
-                <div>Groups 23 game genres into 4 broader categories to improve organization. Using <em><b>Latent
-                            Dirichlet
-                            Allocation</b></em>, the model identifies <em>underlying themes</em> in game genres,
+                <div>Groups 23 game genres into 4 broader categories to improve organization. Using <em><b><a
+                                href="https://en.wikipedia.org/wiki/Latent_Dirichlet_allocation" target="_blank">Latent
+                                Dirichlet
+                                Allocation</a></b></em>, the model identifies <em>underlying themes</em> in game genres,
                     enabling
                     better data visualization. This approach helps compare similar games, making it easier to explore
                     relationships between <em>different types of gameplay</em>.</div>
@@ -120,7 +122,8 @@
                 </div>
                 <div>
                     Selects the <em><b>top 3 games from each cluster</b></em> and creates <em>two blog-style posts</em>
-                    using the <em><b>OpenAI Api</b></em>.
+                    using the <em><b><a href="https://platform.openai.com/docs/overview" target="_blank">OpenAI
+                                Api</a></b></em>.
                     One post highlights their key strengths and appeal, while the other explores their drawbacks.
                     This provides a well-rounded view of what makes these games stand out - both positively and
                     negatively - based on player feedback.
@@ -195,28 +198,30 @@
                 <p><b>GOAL: </b> Classify reviews into <span class="text-success"><b>positive</b></span>, <span
                         class="text-warning"><b>neutral</b></span>, and <span class="text-danger"><b>negative</b></span>
                     sentiments.<br>
-                    <b>CHALLENGE: </b> Dataset ratings (1–5) didn’t align with 3 labels and had a <em>skewed</em>
-                    distribution.
+                    <b>CHALLENGE: </b> The training dataset had ratings from 1 to 5, which didn’t directly map to these
+                    three
+                    sentiment labels. Additionally, the distribution of ratings was highly imbalanced <em>(skewed
+                        distribution)</em>.
                 </p>
                 <h4 class="implementation">Training Process and Results</h4>
                 <ul>
-                    <li><strong>Methodology:</strong> Essentially performing <em><b>regression</b></em> (binned) for
-                        <em><b>a classification task.</b></em>
+                    <li><strong>Approach:</strong> Instead of classifying reviews, <a
+                            href="https://huggingface.co/docs/transformers/en/model_doc/distilbert"
+                            target="_blank">DistilBERT</a> predicts a continuous sentiment score (range: 0 to
+                        1).</li>
+                    <li><strong>Labeling Strategy:</strong> I converted this score into three sentiment categories.</li>
+                    <li><strong>Binning:</strong> <span class="text-success"><b>Positive</b> (0.67-1.0)</span> <b>|</b>
+                        <span class="text-warning"><b>Neutral</b> (0.34-0.66)</span> <b>|</b>
+                        <span class="text-danger"><b>Negative</b> (0 - 0.33)</span>
                     </li>
-                    <li><strong>Model Approach:</strong> Trained <em><b>DistilBERT</b></em> to predict continuous
-                        sentiment
-                        scores (0-1 => 0.33/0.66).
-                    </li>
-                    <li><strong>Post-Processing:</strong> Binned predictions into 3 sentiment categories (positive,
-                        neutral,
-                        negative).</li>
-                    <li class="mt-1"><strong>Training Accuracy (5 Bins):</strong> Achieved <b>83%</b> accuracy during
+                    <li class="mt-2"><strong>Training Accuracy (5 Bins):</strong> Achieved <b>83%</b> accuracy during
                         testing.</li>
-                    <li><strong>Validation Accuracy (3 Bins):</strong> Improved to <b class="text-success">91%</b> on
+                    <li><strong>Validation Accuracy (3 Bins):</strong> Improved to <b>91%</b> on
                         generated reviews.</li>
-                    <li class="mt-1"><strong>Confidence Level:</strong> Calculated using <em>Monte Carlo Sampling</em>
-                        with
-                        10 iterations.</li>
+                    <li class="mt-2"><strong>Confidence Level:</strong> <a
+                            href="https://en.wikipedia.org/wiki/Monte_Carlo_method" target="_blank">Monte Carlo
+                            Sampling</a> (10 iterations) to estimate
+                        the model’s prediction confidence.</li>
                     </p>
                     <p></p>
                     <p></p>
@@ -326,24 +331,30 @@
 
             <!-- Clustering Section -->
             <div class="body-card">
-                <h2 class="mb-4 implementation">Topic Modeling: Implementation</h2>
-                <p><b>GOAL: </b> Reduce <b><em>23 game genres</em></b> into main clusters for analysis and
+                <h2 class="mb-4 implementation">Topic Modeling: Implementation <span class="ms-2 h5">🌐 <em
+                            class="h6"><a href="https://en.wikipedia.org/wiki/Topic_model" target="_blank">Topic
+                                Modeling</a></em></span></h2>
+                <p><b>GOAL:</b> Group <b><em>23 game genres</em></b> into a few main clusters for better analysis and
                     categorization.<br>
-                    <b>CHALLENGE: </b> Reducing genres to <em><b>distinct & meaningful clusters</b></em> while
-                    <u>preserving interpretability</u>.
+                    <b>CHALLENGE:</b> Finding a balance between <em>reducing genres</em> and maintaining <b>clear,
+                        meaningful
+                        clusters</b> that
+                    are easy to interpret.
                 </p>
-                <h4 class="implementation">Latent Dirichlet Allocation (LDA)</h4>
+                <h4 class="implementation">Latent Dirichlet Allocation (LDA) <span class="ms-2 h5">🌐 <em class="h6"><a
+                                href="https://en.wikipedia.org/wiki/Latent_Dirichlet_allocation" target="_blank">Latent
+                                Dirichlet Allocation</a></em></span></h4>
                 <ul>
-                    <li><strong>Stopwords List:</strong> Fine-tuned to exclude irrelevant words and improve the
-                        clarity of clusters.</li>
+                    <li><strong>Stopwords List:</strong> Carefully refined to remove irrelevant words and improve
+                        cluster clarity.</li>
                     <li><strong>Lemmatization:</strong> Standardized words to their base forms for consistent
                         representation.</li>
-                    <li><strong>Bag of Words:</strong> Converted text data into numerical vectors to feed into
-                        the model.</li>
-                    <li><strong>Key Insights and Fine-tuning:</strong>
+                    <li><strong>Bag of Words:</strong> Transformed text data into numerical vectors for model input.
+                    </li>
+                    <li class="mt-2"><strong>Key Insights & Fine-Tuning:</strong>
                         <ul>
-                            <li>Stopword list optimization was critical for achieving meaningful clusters.</li>
-                            <li>Visualizations played a significant role in interpreting and refining the clusters.</li>
+                            <li>Optimizing the stopword list was crucial for generating meaningful clusters.</li>
+                            <li>Visualizations helped interpret and refine the clusters effectively.</li>
                         </ul>
                     </li>
                 </ul>
@@ -409,19 +420,25 @@
 
             <!-- Summarizing Section -->
             <div class="body-card" id="summarization-section">
-                <h2 class="mb-4 implementation">Text Summarization: Implementation</h2>
-                <p><b>GOAL: </b> Summarizing the <b><em>top 3 games per cluster</em></b> into <em><u>pros</u></em> and
-                    <em><u>cons</u></em>.<br>
-                    <b>CHALLENGE: </b> Ensuring the summarization processes every game consistently.
+                <h2 class="mb-4 implementation">Text Summarization: Implementation <span class="ms-2 h5">🌐 <em
+                            class="h6"><a href="https://arxiv.org/abs/2305.14239" target="_blank">LLM Text
+                                Summarization</a></em></span></h2>
+                <p><b>GOAL:</b> Summarize the <b><em>top 3 games per cluster</em></b> by extracting key <span
+                        class="text-success"><b>pros</b></span> and <span class="text-danger"><b>cons</b></span>.<br>
+                    <b>CHALLENGE:</b> Ensuring the summarization processes <em>every single game</em> consistently.
                 </p>
-                <h4 class="implementation">OpenAI API Integration</h4>
+                <h4 class="implementation">OpenAI API Integration <span class="ms-2 h5">🌐 <em class="h6"><a
+                                href="https://platform.openai.com/docs/overview" target="_blank">OpenAI
+                                Api</a></em></span></h4>
                 <ul>
-                    <li><strong>Model Selection:</strong> Focused on improving <em>inference speed</em>.</li>
-                    <li><strong>Token Optimization:</strong> Reduced costs and ensured <em>prompt efficiency</em>.</li>
-                    <li><strong>Deployment Optimization</strong>
+                    <li><strong>Model Selection:</strong> Prioritized <em>faster inference</em> for efficiency.</li>
+                    <li><strong>Token Optimization:</strong> <em>Minimized costs</em> while maintaining <em>prompt
+                            effectiveness</em>.</li>
+                    <li class="mt-2"><strong>Deployment Optimization:</strong>
                         <ul>
-                            <li>HTML Generation: Ensured seamless integration with proper code.</li>
-                            <li>Async Handling & Lazy Loading: Improving <em>response times</em>.</li>
+                            <li>HTML Generation: Ensured smooth integration with well-structured code.</li>
+                            <li>Async Handling & Lazy Loading: Improved <em>response times</em> for a better user
+                                experience.</li>
                         </ul>
                     </li>
                 </ul>
@@ -483,7 +500,7 @@
 
             <!-- Footer -->
             <footer>&copy; 2025 Powered by ML & AI | Discovering the Game Within | Crafted with 💜 by <a
-                    href="https://github.com/Senimtra" target="_blank">Me</a></footer>
+                    href="https://github.com/Senimtra" target="_blank">Senimtra</a></footer>
 
         </div>
     </div>

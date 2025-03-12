@@ -6,7 +6,6 @@ body {
 }
 
 a {
-    text-decoration: none;
     color: #d9b3ff;
 }
 
@@ -495,7 +494,7 @@ a[data-bs-toggle="modal"] {
 }
 
 .modal-card:hover {
-    transform: translateY(-2px) scale(1.015);
+    transform: translateY(-2px) scale(1.01);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     cursor: pointer;
 }
